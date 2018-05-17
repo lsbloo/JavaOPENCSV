@@ -1,0 +1,6 @@
+package com.apps4Society.dao;
+import java.sql.*;
+public class ConfBanco {
+	
+
+}

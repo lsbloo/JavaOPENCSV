@@ -1,0 +1,32 @@
+
+
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+
+import com.opencsv.CSVReader;
+
+
+public class Main {
+	
+	private static CSVReader reader;
+	
+	public static void main(String[] args){
+		
+		
+		try{
+			reader = new CSVReader(new FileReader("/home/osvaldoairon/Documentos/clientes.csv"));
+			String[] proxLinha;
+			while((proxLinha=reader.readNext())!= null){
+				System.out.println(proxLinha[0]);
+				
+			}
+		}catch(IOException e){
+			
+			
+		}
+		
+		
+	}
+
+}

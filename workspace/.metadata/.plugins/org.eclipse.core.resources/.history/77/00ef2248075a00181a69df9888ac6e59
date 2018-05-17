@@ -1,0 +1,40 @@
+
+
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.sql.SQLException;
+
+import com.apps4Society.conf.ConfBanco;
+import com.apps4Society.dao.Municipios_control;
+import com.apps4Society.model.Municipios;
+import com.opencsv.CSVReader;
+
+
+public class Main {
+	
+
+	
+	public static void main(String[] args) throws IOException, SQLException, ClassNotFoundException{
+		
+		
+		Municipios m = new Municipios();
+		
+		Municipios_control n = new Municipios_control();
+		
+		m.setEstado("pernambuco");
+		m.setLatitude(-89829182);
+		m.setLongitude(-1821928);
+		m.setNome("pedra");
+		m.setPopulacao(200000);
+		m.setSite("www.pedra.com.br");
+		
+		n.addMunicipio(m);
+		//lerArquivosCSV("/home/osvaldoairon/Documentos/clientes.csv");
+		
+		
+		
+	}
+	
+
+}

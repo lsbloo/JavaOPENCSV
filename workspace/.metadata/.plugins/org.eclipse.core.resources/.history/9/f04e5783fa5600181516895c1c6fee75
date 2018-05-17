@@ -1,0 +1,45 @@
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.Scanner;
+
+
+public class main {
+	
+	
+	
+	public static void main(String[] args){
+		
+		File arquivocsv = new File("/home/osvaldoairon/Documentos/clientes.csv");
+		
+		
+		
+		
+		try{
+			String linhaarq = new String();
+			
+			Scanner leitor = new Scanner(arquivocsv);
+			
+			leitor.nextLine();
+			
+			
+			while(leitor.hasNext()){
+				
+				linhaarq = leitor.nextLine();
+				
+				String[] valores = linhaarq.split(",");
+				
+				System.out.println(valores[0]);
+				
+				
+			}
+			
+			
+		}catch(FileNotFoundException e){
+			
+		}
+		
+		
+		
+	}
+
+}

@@ -1,0 +1,16 @@
+
+
+import java.io.FileReader;
+import com.opencsv.CSVReader;
+
+
+public class Main {
+	
+	private CSVReader reader;
+	
+	public static void main(String[] args){
+		
+		reader = new CSVReader(new FileReader("/home/osvaldoairon/Documentos/clientes.csv"));
+	}
+
+}
