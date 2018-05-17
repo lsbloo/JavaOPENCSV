@@ -57,10 +57,13 @@ public class AtrativoTuristico {
 	public void setInfoContato(String infoContato) {
 		this.infoContato = infoContato;
 	}
+	
+	
 
 	public AtrativoTuristico() {}
 	
 	public AtrativoTuristico(String nome , double latitude , double longitude , String comoChegar, String site , String infoContato){
+		
 		setNome(nome);
 		setLatitude(latitude);
 		setLongitude(longitude);
@@ -68,6 +71,7 @@ public class AtrativoTuristico {
 		setSite(site);
 		setInfoContato(infoContato);
 	}
+	
 	
 
 }

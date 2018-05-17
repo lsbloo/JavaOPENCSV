@@ -55,12 +55,13 @@ public class LoaderCSV {
 	public ArrayList<AtrativoTuristico> lerArquivosCSV_AtrativoTuristico(String caminhoCSV){
 		/*
 		 * Indices para AtrativoTuristicos
+		 * 
 		 * 0 = nome
 		 * 1 = latitude
 		 * 2 = longitude
 		 * 3 = comochegar
-		 * 4 = site
-		 * 5 = infoContato;
+		 * 4 = infocontato;
+		 * 5 = site;
 		 */
 		try {
 			CSVReader leitor = new CSVReader(new FileReader(caminhoCSV));
