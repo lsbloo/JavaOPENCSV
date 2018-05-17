@@ -3,34 +3,59 @@
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.sql.SQLException;
 
+import com.apps4Society.conf.ConfBanco;
+import com.apps4Society.dao.AtrativoTuristico_control;
+import com.apps4Society.dao.Municipios_control;
+import com.apps4Society.model.AtrativoTuristico;
+import com.apps4Society.model.Municipios;
+import com.appss4Society.LoaderCSV;
 import com.opencsv.CSVReader;
 
+import java.util.ArrayList;
 
 public class Main {
-	
+
+	private static ArrayList<Municipios> lista_municipios = new ArrayList<Municipios>();
+	private static ArrayList<AtrativoTuristico> lista_Atrativo = new ArrayList<AtrativoTuristico>();
 
 	
-	public static void main(String[] args) throws IOException{
+	public static void main(String[] args) throws IOException, SQLException, ClassNotFoundException{
 		
-		
-		lerArquivosCSV("/home/osvaldoairon/Documentos/clientes.csv");
+		/*
+		 * INitir;
+		 */
+		carregarAtrativosTuristicos();
 		
 	}
 	
-	public static void lerArquivosCSV(String caminhoCSV) throws IOException{
-		/*
-		 * Cria um objeto do tipo leitorCsv que carregar um arquivo do tipo csv;
-		 * é necessario passar um caminho do arquivo para que ele carregue;
-		 * foi criado um array de string que percorre a cada iteraçcao do leitor
-		 * cada campo é separado por virgula, desse modo ele retorna os dados da coluna 0
-		 */
-		CSVReader leitor = new CSVReader(new FileReader(caminhoCSV));
-		String[] leitorLinhas;
-		while((leitorLinhas=leitor.readNext()) != null){
-			System.out.println(leitorLinhas[0]);
+	
+	public static void carregarAtrativosTuristicos() throws SQLException{
+		LoaderCSV loader_atrativo = new LoaderCSV();
+
+		AtrativoTuristico_control a = new AtrativoTuristico_control();
+		lista_Atrativo = loader_atrativo.lerArquivosCSV_AtrativoTuristico("/home/osvaldoairon/Documentos/atrativoTuristico.csv");
+		if(lista_Atrativo!=null){
+			for(int i = 0 ; i <lista_Atrativo.size();i++){
+				a.addAtratativoTuristico(lista_Atrativo.get(i));
+			}
 		}
 		
 	}
+	
+	public static void carregarMunicipios() throws IOException, ClassNotFoundException, SQLException{
+		LoaderCSV loader_muncipios = new LoaderCSV();
+		Municipios_control n = new Municipios_control();
+		
+		lista_municipios = loader_muncipios.lerArquivosCSV_Municipio("/home/osvaldoairon/Documentos/xd.csv");
+		
+		if(lista_municipios!=null){
+			for(int i =0 ; i<lista_municipios.size();i++){
+				n.addMunicipio(lista_municipios.get(i));
+			}
+		}
+	}
+	
 
 }
