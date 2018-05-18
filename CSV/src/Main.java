@@ -8,8 +8,10 @@ import java.sql.SQLException;
 import com.apps4Society.conf.ConfBanco;
 import com.apps4Society.dao.AtrativoTuristico_control;
 import com.apps4Society.dao.Municipios_control;
+import com.apps4Society.dao.Praia_control;
 import com.apps4Society.model.AtrativoTuristico;
 import com.apps4Society.model.Municipios;
+import com.apps4Society.model.Praia;
 import com.appss4Society.LoaderCSV;
 import com.opencsv.CSVReader;
 
@@ -19,6 +21,7 @@ public class Main {
 
 	private static ArrayList<Municipios> lista_municipios = new ArrayList<Municipios>();
 	private static ArrayList<AtrativoTuristico> lista_Atrativo = new ArrayList<AtrativoTuristico>();
+	private static ArrayList<Praia> list_praia = new ArrayList<Praia>();
 
 	
 	public static void main(String[] args) throws IOException, SQLException, ClassNotFoundException{
@@ -26,11 +29,25 @@ public class Main {
 		/*
 		 * INitir;
 		 */
-		carregarAtrativosTuristicos();
-		
+		carregarPraias();
+		//carregarAtrativosTuristicos();
+		//carregarMunicipios();
 	}
 	
 	
+	public static void carregarPraias() throws SQLException{
+		LoaderCSV loader_praia = new LoaderCSV();
+		
+		Praia_control praia = new Praia_control();
+		
+		list_praia = loader_praia.lerArquivosCSV_Praia("/home/osvaldoairon/Documentos/Praias.csv");
+		
+		if(list_praia != null){
+			for(int i = 0 ; i < list_praia.size();i++){
+				praia.addPraia(list_praia.get(i));
+			}
+		}
+	}
 	public static void carregarAtrativosTuristicos() throws SQLException{
 		LoaderCSV loader_atrativo = new LoaderCSV();
 

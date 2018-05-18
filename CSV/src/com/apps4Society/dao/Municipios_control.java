@@ -11,14 +11,16 @@ public class Municipios_control {
 		
 		try{
 			Connection cx = ConfBanco.getConnection();
-			String sql = "INSERT INTO municipios(estado,latitude,longitude,nome,populacao,site) VALUES(?,?,?,?,?,?)";
+			String sql = "INSERT INTO municipios(cep,area_territorial,estado,latitude,longitude,nome,populacao,site) VALUES(?,?,?,?,?,?,?,?)";
 			PreparedStatement statement = (PreparedStatement)cx.prepareStatement(sql);
-			statement.setString(1, municipios.getEstado());
-			statement.setDouble(2,municipios.getLatitude());
-			statement.setDouble(3, municipios.getLongitude());
-			statement.setString(4, municipios.getNome());
-			statement.setInt(5, municipios.getPopulacao());
-			statement.setString(6, municipios.getSite());
+			statement.setString(1, municipios.getCep());
+			statement.setString(2, municipios.getAreaTerritorial());
+			statement.setString(3, municipios.getEstado());
+			statement.setDouble(4,municipios.getLatitude());
+			statement.setDouble(5, municipios.getLongitude());
+			statement.setString(6, municipios.getNome());
+			statement.setInt(7, municipios.getPopulacao());
+			statement.setString(8, municipios.getSite());
 			
 			statement.execute();
 			statement.close();

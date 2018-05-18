@@ -12,12 +12,13 @@ public class AtrativoTuristico {
 		return id;
 	}
 	
-	private String nome;
-	private double latitude;
-	private double longitude;
-	private String comoChegar;
-	private String site;
-	private String infoContato;
+	private String nome; // 0
+	private double latitude; // 1
+	private double longitude; // 2
+	private String comoChegar; // 3
+	private String site; // 4
+	private String infoContato; // 5
+	private String descricao; // 6
 	
 	public String getNome() {
 		return nome;
@@ -59,17 +60,27 @@ public class AtrativoTuristico {
 	}
 	
 	
+	
+	
 
 	public AtrativoTuristico() {}
 	
-	public AtrativoTuristico(String nome , double latitude , double longitude , String comoChegar, String site , String infoContato){
+	public AtrativoTuristico(String nome ,String comoChegar, String descricao , String infoContato , double latitude, double longitude, String site){
 		
 		setNome(nome);
+		setComoChegar(comoChegar);
+		setDescricao(descricao);
+		setInfoContato(infoContato);
 		setLatitude(latitude);
 		setLongitude(longitude);
-		setComoChegar(comoChegar);
 		setSite(site);
-		setInfoContato(infoContato);
+		
+	}
+	public String getDescricao() {
+		return descricao;
+	}
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
 	}
 	
 	

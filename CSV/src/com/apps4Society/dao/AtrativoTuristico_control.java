@@ -8,18 +8,20 @@ import java.sql.SQLException;
 public class AtrativoTuristico_control {
 	
 	
+	
 	public void addAtratativoTuristico(AtrativoTuristico aTuristico) throws SQLException{
 		try{
 			Connection cx = ConfBanco.getConnection();
-			String sql = "INSERT INTO atrativos_turisticos(nome,latitude,longitude,como_chegar,site,info_contato)" +
-					"VALUES (?,?,?,?,?,?)";
+			String sql = "INSERT INTO atrativos_turisticos(nome,como_chegar,descricao,info_contato,latitude,longitude,site)" +
+					"VALUES (?,?,?,?,?,?,?)";
 			PreparedStatement statement = (PreparedStatement)cx.prepareStatement(sql);
 			statement.setString(1, aTuristico.getNome());
-			statement.setDouble(2, aTuristico.getLatitude());
-			statement.setDouble(3,aTuristico.getLongitude());
-			statement.setString(4, aTuristico.getComoChegar());
-			statement.setString(5, aTuristico.getSite());
-			statement.setString(6,aTuristico.getInfoContato());
+			statement.setString(2, aTuristico.getComoChegar());
+			statement.setString(3, aTuristico.getDescricao());
+			statement.setString(4,aTuristico.getInfoContato());
+			statement.setDouble(5, aTuristico.getLatitude());
+			statement.setDouble(6,	aTuristico.getLongitude());
+			statement.setString(7,aTuristico.getSite());
 			
 			
 			statement.execute();
