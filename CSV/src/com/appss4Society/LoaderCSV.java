@@ -1,12 +1,15 @@
 package com.appss4Society;
 
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import com.apps4Society.model.Municipios;
 import com.apps4Society.model.AtrativoTuristico;
 import java.util.ArrayList;
 import com.opencsv.CSVReader;
+import com.opencsv.bean.CsvToBeanBuilder;
 import com.apps4Society.model.Praia;
+import java.util.List;
 
 public class LoaderCSV {
 	private static ArrayList<Municipios> list_mun =  new ArrayList<Municipios>();
@@ -22,6 +25,19 @@ public class LoaderCSV {
 	 * ele pega sempre a primeira linha de cada coluna, impossibilitando do usuario criar algum "nome referencia"
 	 * na primeira linha do arquivo
 	 */
+	
+	public void teste() throws IllegalStateException, IOException{
+		/*
+		 * Esse codigo no FIleReader permite que as primeiras linhas do arquivos nao sejam lidas
+		 * dessa forma facilitando a compreensando do usuario para inserir os dados respectivos;
+		 */
+		CSVReader reader = new CSVReader(new FileReader("/home/osvaldoairon/Documentos/xd.csv"),',', '\t',1);
+		 String[] linhas;
+		 while((linhas=reader.readNext())!=null){
+			 System.out.println(linhas[2]);
+			
+		 }
+	}
 	
 	
 	public ArrayList<Praia> lerArquivosCSV_Praia(String caminhoCSV){
@@ -39,7 +55,7 @@ public class LoaderCSV {
 		 */
 		try{
 			
-			CSVReader leitor = new CSVReader(new FileReader(caminhoCSV));
+			CSVReader leitor = new CSVReader(new FileReader(caminhoCSV),',', '\t',1);
 			String[] leitorLinhas;
 			
 			
@@ -75,7 +91,7 @@ public class LoaderCSV {
 		 */
 		try{
 			
-			CSVReader leitor = new CSVReader(new FileReader(caminhoCSV));
+			CSVReader leitor = new CSVReader(new FileReader(caminhoCSV),',', '\t',1);
 			String[] leitorLinhas;
 			
 			
@@ -104,7 +120,7 @@ public class LoaderCSV {
 		 * 6 = site;
 		 */
 		try {
-			CSVReader leitor = new CSVReader(new FileReader(caminhoCSV));
+			CSVReader leitor = new CSVReader(new FileReader(caminhoCSV),',', '\t',1);
 			String[] leitorLinhas;
 			while((leitorLinhas=leitor.readNext())!=null){
 				list_atrativos.add(new AtrativoTuristico(leitorLinhas[0],leitorLinhas[1],leitorLinhas[2],leitorLinhas[3],Double.parseDouble(leitorLinhas[4]),Double.parseDouble(leitorLinhas[5]),leitorLinhas[6]));

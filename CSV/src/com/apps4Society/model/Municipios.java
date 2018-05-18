@@ -1,5 +1,7 @@
 package com.apps4Society.model;
 
+import com.opencsv.bean.CsvBindByName;
+
 public class Municipios {
 
 private long id;
@@ -11,14 +13,28 @@ private long id;
 		return id;
 	}
 	
-	
+	@CsvBindByName(column = "CEP", required = true)
 	private String cep;
+	
+	@CsvBindByName(column = "AREA-TERRITORIAL", required = true)
 	private String areaTerritorial;
+	
+	@CsvBindByName(column = "NOME", required = true)
 	private String nome;
+	
+	@CsvBindByName(column = "POPULACAO", required = true)
 	private int populacao;
+	
+	@CsvBindByName(column = "LATITUDE", required = true)
 	private double latitude;
+	
+	@CsvBindByName(column = "LONGITUDE", required = true)
 	private double longitude;
+	
+	@CsvBindByName(column = "ESTADO", required = true)
 	private String estado;
+	
+	@CsvBindByName(column = "SITE", required = true)
 	private String site;
 	
 	
