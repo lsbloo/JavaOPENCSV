@@ -58,11 +58,14 @@ public class LoaderCSV {
 			CSVReader leitor = new CSVReader(new FileReader(caminhoCSV),',', '\t',1);
 			String[] leitorLinhas;
 			
-			
 			while((leitorLinhas=leitor.readNext()) != null){
 				int x = leitorLinhas.length -1;				
+				if(leitorLinhas[0].isEmpty() || leitorLinhas[1].isEmpty() || leitorLinhas[2].isEmpty() || leitorLinhas[6].isEmpty() || leitorLinhas[7].isEmpty() || leitorLinhas[8].isEmpty()){
+					System.out.print("Preencha os dados corretamente");
+				}else{
+					list_praias.add(new Praia(leitorLinhas[0],leitorLinhas[1],leitorLinhas[2],leitorLinhas[3],Double.parseDouble(leitorLinhas[4]),Double.parseDouble(leitorLinhas[5]),leitorLinhas[6],leitorLinhas[7],leitorLinhas[8]));
+				}
 				
-				list_praias.add(new Praia(leitorLinhas[0],leitorLinhas[1],leitorLinhas[2],leitorLinhas[3],Double.parseDouble(leitorLinhas[4]),Double.parseDouble(leitorLinhas[5]),leitorLinhas[6],leitorLinhas[7],leitorLinhas[8]));
 			}
 		}catch(Exception e){
 			e.printStackTrace();
@@ -96,8 +99,15 @@ public class LoaderCSV {
 			
 			
 			while((leitorLinhas=leitor.readNext()) != null){
-				int x = leitorLinhas.length -1;				
-				list_mun.add(new Municipios(leitorLinhas[0],leitorLinhas[1],leitorLinhas[2],Double.valueOf(leitorLinhas[3]),Double.valueOf(leitorLinhas[4]),leitorLinhas[5],Integer.parseInt(leitorLinhas[6]),leitorLinhas[7]));
+				int x = leitorLinhas.length -1;
+				
+				if(leitorLinhas[0].isEmpty() || leitorLinhas[1].isEmpty() || leitorLinhas[2].isEmpty() || leitorLinhas[5].isEmpty() || leitorLinhas[7].isEmpty()){
+					System.out.println("Preencha os dados corretamente/1");	
+				}
+				else{
+					list_mun.add(new Municipios(leitorLinhas[0],leitorLinhas[1],leitorLinhas[2],Double.valueOf(leitorLinhas[3]),Double.valueOf(leitorLinhas[4]),leitorLinhas[5],Integer.parseInt(leitorLinhas[6]),leitorLinhas[7]));
+				}
+				
 				
 			}
 		}catch(Exception e){
@@ -123,7 +133,12 @@ public class LoaderCSV {
 			CSVReader leitor = new CSVReader(new FileReader(caminhoCSV),',', '\t',1);
 			String[] leitorLinhas;
 			while((leitorLinhas=leitor.readNext())!=null){
-				list_atrativos.add(new AtrativoTuristico(leitorLinhas[0],leitorLinhas[1],leitorLinhas[2],leitorLinhas[3],Double.parseDouble(leitorLinhas[4]),Double.parseDouble(leitorLinhas[5]),leitorLinhas[6]));
+				if(leitorLinhas[0].isEmpty() || leitorLinhas[1].isEmpty() || leitorLinhas[2].isEmpty() || leitorLinhas[3].isEmpty() || leitorLinhas[6].isEmpty()){
+					System.out.println("Preencha os dados corretamente/1");	
+				}else{
+					list_atrativos.add(new AtrativoTuristico(leitorLinhas[0],leitorLinhas[1],leitorLinhas[2],leitorLinhas[3],Double.parseDouble(leitorLinhas[4]),Double.parseDouble(leitorLinhas[5]),leitorLinhas[6]));
+				}
+				
 			}
 		}catch(Exception e){
 			e.printStackTrace();

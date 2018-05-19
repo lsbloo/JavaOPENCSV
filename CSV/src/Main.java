@@ -25,16 +25,18 @@ public class Main {
 
 	
 	public static void main(String[] args) throws IOException, SQLException, ClassNotFoundException{
-		LoaderCSV l = new LoaderCSV();
+		
 		//l.teste();
 		
+		Municipios_control l = new Municipios_control();
+
 		
 		/*
 		 * INitir;
 		 */
 		//carregarPraias();
-		//carregarAtrativosTuristicos();
-		carregarMunicipios();
+		carregarAtrativosTuristicos();
+		//carregarMunicipios();
 	}
 	
 	

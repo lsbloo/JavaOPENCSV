@@ -16,7 +16,7 @@ public class ConfBanco {
 		Connection com = DriverManager.getConnection(url,"postgres","admin");
 		
 		if(com!=null){
-			System.out.print("ok");
+			System.err.println("banco connectado!");
 		}
 		return com;
 	}
