@@ -9,6 +9,7 @@ import java.util.ArrayList;
 
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JButton;
 import javax.swing.JTextField;
@@ -114,6 +115,7 @@ public class InterfaceBuscaCSV implements ActionListener{
 			}
 			if(inter){
 				dir.setText("CSV válido nao encontrado!");
+				JOptionPane.showMessageDialog(null, "Porfavor coloque um arquivo com os requisitos necessários");
 			}
 		}
 		
@@ -128,6 +130,7 @@ public class InterfaceBuscaCSV implements ActionListener{
 				for(int i = 0 ; i < list_praia.size();i++){
 					praia.addPraia(list_praia.get(i));
 				}
+				JOptionPane.showMessageDialog(null, "Dados do tipo Praias foram inseridos");
 			}
 		}
 		public static void carregarAtrativosTuristicos() throws SQLException{
@@ -140,6 +143,7 @@ public class InterfaceBuscaCSV implements ActionListener{
 					a.addAtratativoTuristico(lista_Atrativo.get(i));
 				}
 			}
+			JOptionPane.showMessageDialog(null, "Dados do tipo AtrativoTuristico foram inseridos");
 			
 		}
 		
@@ -154,6 +158,7 @@ public class InterfaceBuscaCSV implements ActionListener{
 					n.addMunicipio(lista_municipios.get(i));
 				}
 			}
+			JOptionPane.showMessageDialog(null, "Dados do tipo Municipios foram inseridos");
 		}
 	}
 
