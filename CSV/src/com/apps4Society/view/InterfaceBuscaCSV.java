@@ -74,6 +74,7 @@ public class InterfaceBuscaCSV implements ActionListener{
 		            File arquivo = arquivocsv.getSelectedFile();
 		           dir.setText(arquivo.getPath());
 		           String caminho = arquivo.toString();
+		           System.out.println(arquivo.toString());
 		           String[] verific = caminho.split("/");
 		           try {
 					verificaTipo(verific);

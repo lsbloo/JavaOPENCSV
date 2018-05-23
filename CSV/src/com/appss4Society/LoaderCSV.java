@@ -1,7 +1,9 @@
 package com.appss4Society;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import com.apps4Society.model.Municipios;
 import com.apps4Society.model.AtrativoTuristico;
@@ -10,6 +12,8 @@ import com.opencsv.CSVReader;
 import com.opencsv.bean.CsvToBeanBuilder;
 import com.apps4Society.model.Praia;
 import java.util.List;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class LoaderCSV {
 	private static ArrayList<Municipios> list_mun =  new ArrayList<Municipios>();
@@ -30,13 +34,19 @@ public class LoaderCSV {
 		/*
 		 * Esse codigo no FIleReader permite que as primeiras linhas do arquivos nao sejam lidas
 		 * dessa forma facilitando a compreensando do usuario para inserir os dados respectivos;
-		 */
-		CSVReader reader = new CSVReader(new FileReader("/home/osvaldoairon/Documentos/xd.csv"),',', '\t',1);
+		 * 
+		 * 
+		 * CSVReader reader = new CSVReader(new FileReader("/home/osvaldoairon/Documentos/xd.csv"),',', '\t',1);
 		 String[] linhas;
 		 while((linhas=reader.readNext())!=null){
 			 System.out.println(linhas[2]);
 			
 		 }
+	}
+		 */
+		
+		
+	
 	}
 	
 	
@@ -64,6 +74,7 @@ public class LoaderCSV {
 					System.out.print("Preencha os dados corretamente");
 				}else{
 					list_praias.add(new Praia(leitorLinhas[0],leitorLinhas[1],leitorLinhas[2],leitorLinhas[3],Double.parseDouble(leitorLinhas[4]),Double.parseDouble(leitorLinhas[5]),leitorLinhas[6],leitorLinhas[7],leitorLinhas[8]));
+					
 				}
 				
 			}
@@ -105,7 +116,13 @@ public class LoaderCSV {
 					System.out.println("Preencha os dados corretamente/1");	
 				}
 				else{
-					list_mun.add(new Municipios(leitorLinhas[0],leitorLinhas[1],leitorLinhas[2],Double.valueOf(leitorLinhas[3]),Double.valueOf(leitorLinhas[4]),leitorLinhas[5],Integer.parseInt(leitorLinhas[6]),leitorLinhas[7]));
+					list_mun.add(new Municipios(leitorLinhas[0],leitorLinhas[1],leitorLinhas[2],Double.parseDouble(leitorLinhas[3]),Double.parseDouble(leitorLinhas[4]),leitorLinhas[5],Integer.parseInt(leitorLinhas[6]),leitorLinhas[7]))
+					;
+					
+					/*
+					 * Cria um txt com os dados que foram inseridos no banco;
+					 */
+					salvaLogs_municipios(list_mun , caminhoCSV);
 				}
 				
 				
@@ -147,5 +164,44 @@ public class LoaderCSV {
 		return list_atrativos;
 	}
 	
+	
+	public void salvaLogs_municipios(ArrayList<Municipios> list , String caminhoCSV){
+		
+		try {
+			// File file = new
+			
+			File file = new File("/home/osvaldoairon/Documentos/Municipios_LOG.txt"); // quebra de linha \r\n
+			String dados_muncipio = "";
+			String conteudo;
+			if(file!=null){
+				System.out.println("Arquivo criado");
+			}
+
+			FileWriter arq = new FileWriter(file);
+			arq.write("--------------- Relatório de Municipios Salvos pelo Sistema ---------------------");
+			arq.write("\r\n");
+			for (int i = 0; i < list.size(); i++) {
+
+				dados_muncipio = "Área Territórial: " + list.get(i).getAreaTerritorial() + "\r\n" + "CEP: " + list.get(i).getCep()
+						+ "\r\n" + "Estado: " + list.get(i).getEstado() + "\r\n" + "Latitude: " + list.get(i).getLatitude()
+						+ "\r\n" + "Longitude: " + list.get(i).getLongitude() + "\r\n" + "Nome: " + list.get(i).getNome() + "\r\n" + "População: " + list.get(i).getPopulacao()
+						+ "\r\n" + "Site: " + list.get(i).getSite() + "\r\n" + "----------------------------------------------------------------------------------------------------------------" + "\r\n";
+				
+				arq.write("\r\n");
+				conteudo = dados_muncipio;
+				conteudo += "\r\n";
+
+				arq.write(conteudo);
+
+			}
+			arq.write("------------------------------------------------------------------------------");
+			arq.write("\r\n");
+			arq.write("Armazenados com sucesso!");
+			arq.close();
+
+		} catch (IOException e) {
+			e.printStackTrace();
+}
+	}
 	
 }

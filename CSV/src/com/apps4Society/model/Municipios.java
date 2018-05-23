@@ -79,14 +79,14 @@ private long id;
 	
 	
 	public Municipios(String areaTerritorial,String cep,String estado, Double latitude , Double longitude , String nome , int populacao , String site){
-		setCep(cep);
-		setAreaTerritorial(areaTerritorial);
-		setEstado(estado);
-		setLatitude(latitude);
-		setLongitude(longitude);
-		setNome(nome);
-		setPopulacao(populacao);
-		setSite(site);
+		setAreaTerritorial(areaTerritorial); // 0
+		setCep(cep); // 1
+		setEstado(estado); // 2
+		setLatitude(latitude); // 3
+		setLongitude(longitude); // 4
+		setNome(nome); // 5
+		setPopulacao(populacao); // 6
+		setSite(site); // 7
 	}
 	public String getCep() {
 		return cep;

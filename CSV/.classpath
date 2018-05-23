@@ -19,5 +19,6 @@
 	<classpathentry kind="lib" path="commons-beanutils-1.9.3.jar"/>
 	<classpathentry kind="lib" path="/home/osvaldoairon/Downloads/opencsv-4.1.jar"/>
 	<classpathentry kind="lib" path="postgresql-42.2.2.jar"/>
+	<classpathentry kind="lib" path="slf4j.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
