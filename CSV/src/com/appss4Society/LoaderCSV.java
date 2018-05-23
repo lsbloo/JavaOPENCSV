@@ -12,8 +12,9 @@ import com.opencsv.CSVReader;
 import com.opencsv.bean.CsvToBeanBuilder;
 import com.apps4Society.model.Praia;
 import java.util.List;
-import org.slf4j.Logger;
+import org.slf4j.Logger;	
 import org.slf4j.LoggerFactory;
+import java.io.File;
 
 public class LoaderCSV {
 	private static ArrayList<Municipios> list_mun =  new ArrayList<Municipios>();
@@ -74,6 +75,7 @@ public class LoaderCSV {
 					System.out.print("Preencha os dados corretamente");
 				}else{
 					list_praias.add(new Praia(leitorLinhas[0],leitorLinhas[1],leitorLinhas[2],leitorLinhas[3],Double.parseDouble(leitorLinhas[4]),Double.parseDouble(leitorLinhas[5]),leitorLinhas[6],leitorLinhas[7],leitorLinhas[8]));
+					salvarLogs_praias(list_praias,caminhoCSV);
 					
 				}
 				
@@ -154,6 +156,7 @@ public class LoaderCSV {
 					System.out.println("Preencha os dados corretamente/1");	
 				}else{
 					list_atrativos.add(new AtrativoTuristico(leitorLinhas[0],leitorLinhas[1],leitorLinhas[2],leitorLinhas[3],Double.parseDouble(leitorLinhas[4]),Double.parseDouble(leitorLinhas[5]),leitorLinhas[6]));
+					salvarLogs_turisticos(list_atrativos,caminhoCSV);
 				}
 				
 			}
@@ -165,12 +168,104 @@ public class LoaderCSV {
 	}
 	
 	
+	public void salvarLogs_praias(ArrayList<Praia> list , String caminhoCSV){
+		
+		try {
+			// File file = new
+	
+			File file = new File("Praias.txt"); // quebra de linha \r\n
+			String dados_turismo = "";
+			String conteudo;
+			String saidacorretaTubarao;
+			String saidacorretaBanho;
+			if(file!=null){
+				System.out.println("Arquivo criado");
+			}
+
+			FileWriter arq = new FileWriter(file);
+			arq.write("--------------- Relatório de Praias Salvos pelo Sistema ---------------------");
+			arq.write("\r\n");
+			for (int i = 0; i < list.size(); i++) {
+
+				if(list.get(i).getPerigoTubarao()){
+					saidacorretaTubarao="sim";
+				}else{
+					saidacorretaTubarao="não";
+				}
+				if(list.get(i).getPropiaBanho()){
+					saidacorretaBanho="sim";
+				}else{
+					saidacorretaBanho="não";
+				}
+				dados_turismo = "Nome: " + list.get(i).getNome() + "\r\n" + "Como chegar: " + list.get(i).getComochegar()
+						+ "\r\n" + "Descrição: " + list.get(i).getDescricao() + "\r\n" + "Latitude: " + list.get(i).getLatitude()
+						+ "\r\n" + "Longitude: " + list.get(i).getLongitude() + "\r\n" + "Infomação Contato: " + list.get(i).getInfo_contato() + "\r\n" +
+						"\r\n" + "Perigo Tubarao: " + saidacorretaTubarao +  "\r\n"+"Propria para banho?: " +saidacorretaBanho +"\r\n "+ "TIPO DA ORLA: "+list.get(i).getTipoOrla()  +"\r\n" + "----------------------------------------------------------------------------------------------------------------" + "\r\n";
+				
+				arq.write("\r\n");
+				conteudo = dados_turismo;
+				conteudo += "\r\n";
+
+				arq.write(conteudo);
+
+			}
+			arq.write("\r\n");
+			arq.write("Armazenados com sucesso!");
+			arq.close();
+
+		} catch (IOException e) {
+			e.printStackTrace();
+			}
+		
+	}
+	public void salvarLogs_turisticos(ArrayList<AtrativoTuristico> list, String caminhoCSV){
+		try {
+			// File file = new
+			
+			
+			
+			File file = new File("AtrativosTuristicos_LOG.txt"); // quebra de linha \r\n
+			String dados_turismo = "";
+			String conteudo;
+			if(file!=null){
+				System.out.println("Arquivo criado");
+			}
+
+			FileWriter arq = new FileWriter(file);
+			arq.write("--------------- Relatório de Atrativos Turisticos Salvos pelo Sistema ---------------------");
+			arq.write("\r\n");
+			for (int i = 0; i < list.size(); i++) {
+
+				dados_turismo = "Nome: " + list.get(i).getNome() + "\r\n" + "Como chegar: " + list.get(i).getComoChegar()
+						+ "\r\n" + "Descrição: " + list.get(i).getDescricao() + "\r\n" + "Latitude: " + list.get(i).getLatitude()
+						+ "\r\n" + "Longitude: " + list.get(i).getLongitude() + "\r\n" + "Infomação Contato: " + list.get(i).getInfoContato() + "\r\n" +
+						"\r\n" + "Site: " + list.get(i).getSite() + "\r\n" + "----------------------------------------------------------------------------------------------------------------" + "\r\n";
+				
+				arq.write("\r\n");
+				conteudo = dados_turismo;
+				conteudo += "\r\n";
+
+				arq.write(conteudo);
+
+			}
+			arq.write("\r\n");
+			arq.write("Armazenados com sucesso!");
+			arq.close();
+
+		} catch (IOException e) {
+			e.printStackTrace();
+			}
+	}
+	
+	
 	public void salvaLogs_municipios(ArrayList<Municipios> list , String caminhoCSV){
 		
 		try {
 			// File file = new
 			
-			File file = new File("/home/osvaldoairon/Documentos/Municipios_LOG.txt"); // quebra de linha \r\n
+			
+			
+			File file = new File("Municipios_LOG.txt"); // quebra de linha \r\n
 			String dados_muncipio = "";
 			String conteudo;
 			if(file!=null){
@@ -194,14 +289,13 @@ public class LoaderCSV {
 				arq.write(conteudo);
 
 			}
-			arq.write("------------------------------------------------------------------------------");
 			arq.write("\r\n");
 			arq.write("Armazenados com sucesso!");
 			arq.close();
 
 		} catch (IOException e) {
 			e.printStackTrace();
-}
+			}
 	}
 	
 }

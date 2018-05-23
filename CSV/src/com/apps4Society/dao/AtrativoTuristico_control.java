@@ -11,7 +11,7 @@ public class AtrativoTuristico_control {
 	
 	public boolean verificaAtrativoTuristico(AtrativoTuristico at) throws SQLException{
 		Connection cx = ConfBanco.getConnection();
-		String sql = "SELECT * FROM atrativos_turisticos";
+		String sql = "SELECT nome,como_chegar FROM atrativos_turisticos";
 		PreparedStatement st = (PreparedStatement)cx.prepareStatement(sql);
 		ResultSet rx = st.executeQuery();
 		while(rx.next()){

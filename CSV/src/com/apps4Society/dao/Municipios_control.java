@@ -15,7 +15,7 @@ public class Municipios_control {
 		 * Esse metodo verifica se ja existe dados existentes entre o banco de dados e o CSV
 		 * 
 		 */
-		String sql = "SELECT * FROM municipios";
+		String sql = "SELECT nome,estado FROM municipios";
 		PreparedStatement statement =(PreparedStatement)cx.prepareStatement(sql);
 		
 		ResultSet result = statement.executeQuery();

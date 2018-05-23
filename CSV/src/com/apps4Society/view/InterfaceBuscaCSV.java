@@ -31,6 +31,7 @@ public class InterfaceBuscaCSV implements ActionListener{
 	private static ArrayList<Municipios> lista_municipios = new ArrayList<Municipios>();
 	private static ArrayList<AtrativoTuristico> lista_Atrativo = new ArrayList<AtrativoTuristico>();
 	private static ArrayList<Praia> list_praia = new ArrayList<Praia>();
+	private static String caminho;
 	
 	private static JButton localizararq;
 	private static JTextField dir;
@@ -72,10 +73,13 @@ public class InterfaceBuscaCSV implements ActionListener{
 		            dir.setText("");
 		        } else {
 		            File arquivo = arquivocsv.getSelectedFile();
-		           dir.setText(arquivo.getPath());
-		           String caminho = arquivo.toString();
+		            dir.setText(arquivo.getPath());
+		
+		            caminho = arquivo.toString();
 		           System.out.println(arquivo.toString());
 		           String[] verific = caminho.split("/");
+		           
+		           
 		           try {
 					verificaTipo(verific);
 				} catch (SQLException e1) {
@@ -102,13 +106,13 @@ public class InterfaceBuscaCSV implements ActionListener{
 			boolean inter=false;
 			for(int i = 0 ; i < p.length;i++){
 				if(p[i].equals(validaPraia)){
-					carregarPraias();
+					carregarPraias(caminho);
 					inter = false;
 				}else if(p[i].equals(validaMunicipio)){
-					carregarMunicipios();
+					carregarMunicipios(caminho);
 					inter = false;
 				}else if(p[i].equals(validaAtrativo)){
-					carregarAtrativosTuristicos();
+					carregarAtrativosTuristicos(caminho);
 					inter =false;
 				}else{
 					inter=true;
@@ -120,12 +124,12 @@ public class InterfaceBuscaCSV implements ActionListener{
 			}
 		}
 		
-		public static void carregarPraias() throws SQLException{
+		public static void carregarPraias(String patch) throws SQLException{
 			LoaderCSV loader_praia = new LoaderCSV();
 			
 			Praia_control praia = new Praia_control();
 			
-			list_praia = loader_praia.lerArquivosCSV_Praia("/home/osvaldoairon/Documentos/praias.csv");
+			list_praia = loader_praia.lerArquivosCSV_Praia(patch);
 			
 			if(list_praia != null){
 				for(int i = 0 ; i < list_praia.size();i++){
@@ -134,11 +138,11 @@ public class InterfaceBuscaCSV implements ActionListener{
 				JOptionPane.showMessageDialog(null, "Dados do tipo Praias foram inseridos");
 			}
 		}
-		public static void carregarAtrativosTuristicos() throws SQLException{
+		public static void carregarAtrativosTuristicos(String patch) throws SQLException{
 			LoaderCSV loader_atrativo = new LoaderCSV();
 
 			AtrativoTuristico_control a = new AtrativoTuristico_control();
-			lista_Atrativo = loader_atrativo.lerArquivosCSV_AtrativoTuristico("/home/osvaldoairon/Documentos/atrativoTuristico.csv");
+			lista_Atrativo = loader_atrativo.lerArquivosCSV_AtrativoTuristico(patch);
 			if(lista_Atrativo!=null){
 				for(int i = 0 ; i <lista_Atrativo.size();i++){
 					a.addAtratativoTuristico(lista_Atrativo.get(i));
@@ -148,11 +152,11 @@ public class InterfaceBuscaCSV implements ActionListener{
 			
 		}
 		
-		public static void carregarMunicipios() throws IOException, ClassNotFoundException, SQLException{
+		public static void carregarMunicipios(String patch) throws IOException, ClassNotFoundException, SQLException{
 			LoaderCSV loader_muncipios = new LoaderCSV();
 			Municipios_control n = new Municipios_control();
 			
-			lista_municipios = loader_muncipios.lerArquivosCSV_Municipio("/home/osvaldoairon/Documentos/municipios.csv");
+			lista_municipios = loader_muncipios.lerArquivosCSV_Municipio(patch);
 			
 			if(lista_municipios!=null){
 				for(int i =0 ; i<lista_municipios.size();i++){
