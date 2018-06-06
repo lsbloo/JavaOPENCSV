@@ -20,6 +20,16 @@ public class AtrativoTuristico {
 	private String infoContato; // 5
 	private String descricao; // 6
 	
+	private String date;
+	
+	public void setDate(String date) {
+		this.date=date;
+	}
+	
+	public String getDate() {
+		return date;
+	}
+	
 	public String getNome() {
 		return nome;
 	}
@@ -65,8 +75,8 @@ public class AtrativoTuristico {
 
 	public AtrativoTuristico() {}
 	
-	public AtrativoTuristico(String nome ,String comoChegar, String descricao , String infoContato , double latitude, double longitude, String site){
-		
+	public AtrativoTuristico(String data,String nome ,String comoChegar, String descricao , String infoContato , double latitude, double longitude, String site){
+		setDate(data);
 		setNome(nome);
 		setComoChegar(comoChegar);
 		setDescricao(descricao);

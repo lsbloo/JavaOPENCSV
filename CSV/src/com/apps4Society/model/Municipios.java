@@ -74,20 +74,31 @@ private long id;
 	public void setLongitude(double longitude) {
 		this.longitude = longitude;
 	}
+	private String date;
 	
+	public void setDate(String date) {
+		this.date=date;
+	}
+	
+	public String getDate() {
+		return date;
+	}
 	public Municipios() {}
 	
 	
-	public Municipios(String areaTerritorial,String cep,String estado, Double latitude , Double longitude , String nome , int populacao , String site){
-		setAreaTerritorial(areaTerritorial); // 0
-		setCep(cep); // 1
-		setEstado(estado); // 2
-		setLatitude(latitude); // 3
-		setLongitude(longitude); // 4
-		setNome(nome); // 5
-		setPopulacao(populacao); // 6
-		setSite(site); // 7
+	public Municipios(String data,String areaTerritorial,String cep,String estado, Double latitude , Double longitude , String nome , int populacao , String site){
+		setDate(data); // 0
+		setAreaTerritorial(areaTerritorial); // 1
+		setCep(cep); // 2
+		setEstado(estado); // 3
+		
+		setLatitude(latitude); // 4
+		setLongitude(longitude); // 5
+		setNome(nome); // 6
+		setPopulacao(populacao); // 7
+		setSite(site); // 8
 	}
+	
 	public String getCep() {
 		return cep;
 	}

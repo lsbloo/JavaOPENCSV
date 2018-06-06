@@ -96,14 +96,15 @@ public class LoaderCSV {
 		
 		/*
 		 * Indices Para Municipios
-		 * 0= cep
-		 * 1 = areaTerritorial
-		 * 2 = estado
-		 * 3 = latitude
-		 * 4 = longitude
-		 * 5 = nome
-		 * 6 = populacao
-		 * 7 = site
+		 * 0 = date
+		 * 1= cep
+		 * 2 = areaTerritorial
+		 * 3 = estado
+		 * 4 = latitude
+		 * 5 = longitude
+		 * 6 = nome
+		 * 7 = populacao
+		 * 8 = site
 		 */
 		try{
 			
@@ -118,7 +119,7 @@ public class LoaderCSV {
 					System.out.println("Preencha os dados corretamente/1");	
 				}
 				else{
-					list_mun.add(new Municipios(leitorLinhas[0],leitorLinhas[1],leitorLinhas[2],Double.parseDouble(leitorLinhas[3]),Double.parseDouble(leitorLinhas[4]),leitorLinhas[5],Integer.parseInt(leitorLinhas[6]),leitorLinhas[7]))
+					list_mun.add(new Municipios(leitorLinhas[0],leitorLinhas[1],leitorLinhas[2],leitorLinhas[3],Double.parseDouble(leitorLinhas[4]),Double.parseDouble(leitorLinhas[5]),leitorLinhas[6],Integer.parseInt(leitorLinhas[7]),leitorLinhas[8]))
 					;
 					
 					/*
@@ -155,7 +156,7 @@ public class LoaderCSV {
 				if(leitorLinhas[0].isEmpty() || leitorLinhas[1].isEmpty() || leitorLinhas[2].isEmpty() || leitorLinhas[3].isEmpty() || leitorLinhas[6].isEmpty()){
 					System.out.println("Preencha os dados corretamente/1");	
 				}else{
-					list_atrativos.add(new AtrativoTuristico(leitorLinhas[0],leitorLinhas[1],leitorLinhas[2],leitorLinhas[3],Double.parseDouble(leitorLinhas[4]),Double.parseDouble(leitorLinhas[5]),leitorLinhas[6]));
+					list_atrativos.add(new AtrativoTuristico(leitorLinhas[0],leitorLinhas[1],leitorLinhas[2],leitorLinhas[3],leitorLinhas[4],Double.parseDouble(leitorLinhas[5]),Double.parseDouble(leitorLinhas[6]),leitorLinhas[7]));
 					salvarLogs_turisticos(list_atrativos,caminhoCSV);
 				}
 				
@@ -224,7 +225,7 @@ public class LoaderCSV {
 			
 			
 			
-			File file = new File("AtrativosTuristicos_LOG.txt"); // quebra de linha \r\n
+			File file = new File("/home/osvaldoairon/Documentos/AtrativosTuristicos_LOG.txt"); // quebra de linha \r\n
 			String dados_turismo = "";
 			String conteudo;
 			if(file!=null){
@@ -265,7 +266,7 @@ public class LoaderCSV {
 			
 			
 			
-			File file = new File("Municipios_LOG.txt"); // quebra de linha \r\n
+			File file = new File("/home/osvaldoairon/Documentos/Municipios_LOG.txt"); // quebra de linha \r\n
 			String dados_muncipio = "";
 			String conteudo;
 			if(file!=null){
