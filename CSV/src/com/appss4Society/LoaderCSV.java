@@ -119,8 +119,19 @@ public class LoaderCSV {
 					System.out.println("Preencha os dados corretamente/1");	
 				}
 				else{
-					list_mun.add(new Municipios(leitorLinhas[0],leitorLinhas[1],leitorLinhas[2],leitorLinhas[3],Double.parseDouble(leitorLinhas[4]),Double.parseDouble(leitorLinhas[5]),leitorLinhas[6],Integer.parseInt(leitorLinhas[7]),leitorLinhas[8]))
-					;
+					String data = retireAspas(leitorLinhas[0].trim());
+					String cep = retireAspas(leitorLinhas[1].trim());
+					String area = retireAspas(leitorLinhas[2].trim());
+					String estado = retireAspas(leitorLinhas[3].trim());
+					String latitude = retireAspas(leitorLinhas[4].trim());
+					String longitude = retireAspas(leitorLinhas[5].trim());
+					String nome =retireAspas(leitorLinhas[6].trim());
+					String populacao = retireAspas(leitorLinhas[7].trim());
+					String site = retireAspas(leitorLinhas[8]);
+			
+		
+					
+					list_mun.add(new Municipios(data,cep,area,estado,Double.parseDouble(latitude),Double.parseDouble(longitude),nome,Integer.parseInt(populacao),site));
 					
 					/*
 					 * Cria um txt com os dados que foram inseridos no banco;
@@ -140,14 +151,14 @@ public class LoaderCSV {
 	public ArrayList<AtrativoTuristico> lerArquivosCSV_AtrativoTuristico(String caminhoCSV){
 		/*
 		 * Indices para AtrativoTuristicos
-		 * 
-		 * 0 = nome
-		 * 1 = comoChegar
-		 * 2 = descricao
-		 * 3 = info_contato
-		 * 4 = latitude
-		 * 5 = longitude;
-		 * 6 = site;
+		 * 0 = data
+		 * 1 = nome
+		 * 2 = comoChegar
+		 * 3 = descricao
+		 * 4 = info_contato
+		 * 5 = latitude
+		 * 6 = longitude;
+		 * 7 = site;
 		 */
 		try {
 			CSVReader leitor = new CSVReader(new FileReader(caminhoCSV),',', '\t',1);
@@ -156,7 +167,16 @@ public class LoaderCSV {
 				if(leitorLinhas[0].isEmpty() || leitorLinhas[1].isEmpty() || leitorLinhas[2].isEmpty() || leitorLinhas[3].isEmpty() || leitorLinhas[6].isEmpty()){
 					System.out.println("Preencha os dados corretamente/1");	
 				}else{
-					list_atrativos.add(new AtrativoTuristico(leitorLinhas[0],leitorLinhas[1],leitorLinhas[2],leitorLinhas[3],leitorLinhas[4],Double.parseDouble(leitorLinhas[5]),Double.parseDouble(leitorLinhas[6]),leitorLinhas[7]));
+					String data = retireAspas(leitorLinhas[0].trim());
+					String nome = retireAspas(leitorLinhas[1].trim());
+					String comoChegar = retireAspas(leitorLinhas[2].trim());
+					String descricao = retireAspas(leitorLinhas[3].trim());
+					String info_contato = retireAspas(leitorLinhas[4].trim());
+					String latitude = retireAspas(leitorLinhas[5].trim());
+					String longitude = retireAspas(leitorLinhas[6].trim());
+					String site = retireAspas(leitorLinhas[7].trim());
+					
+					list_atrativos.add(new AtrativoTuristico(data,nome,comoChegar,descricao,info_contato,Double.parseDouble(latitude),Double.parseDouble(longitude),site));
 					salvarLogs_turisticos(list_atrativos,caminhoCSV);
 				}
 				
@@ -299,4 +319,38 @@ public class LoaderCSV {
 			}
 	}
 	
+	public String retireAspas(String string){
+		 /*
+		  * Nao encontrei um metodo na classe String que retira-se os espaços que o CSV do GOOGLE FORMS CRIA,
+		  * entao criei esse metodo para retirar as aspas entre os atributos do municipios cadastrados no CSV
+		  * a ideia do nome do arquivo ainda continua a mesma (municipios.csv ««); or atrativosTUristicos;
+		  */
+		//System.err.println("saida" + string);
+		String saida2 = null;
+		String saida_normal = null;
+		String x = null;
+	
+		String[] saida = string.split("");
+		//System.out.print(saida[1]);
+		
+		for(int i = 1 ; i<saida.length -1 ; i ++){
+			saida2+=saida[i];
+		}
+		String[] saida_original = saida2.split("");
+		for(int i = 4; i< saida_original.length;i++){
+				saida_normal += saida_original[i];
+			
+		}
+		if(saida_normal.contains("null")){
+			String[] vl = saida_normal.split("null");
+			for( String s : vl){
+				System.out.println("xd: "+s);
+
+					 x = s;
+			}
+			
+		}
+		return x;
+	
+	}
 }
