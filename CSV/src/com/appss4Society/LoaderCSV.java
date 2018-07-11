@@ -242,6 +242,13 @@ public class LoaderCSV {
 	public void salvarLogs_turisticos(ArrayList<AtrativoTuristico> list, String caminhoCSV){
 		try {
 			// File file = new
+			/*
+			 * SALVA OS DADOS ARMAZENADOS EM UM ARQUIVO TXT QUE SERVE COMO REGISTRO DA OPERAÇÃO.
+			 */
+			
+			
+			// Obs:
+			// Esse caminho do log precisa ser melhorado, carregar o patch que o usuario coloca quando carrega um arquivo.
 			
 			
 			

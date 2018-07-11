@@ -100,6 +100,16 @@ public class InterfaceBuscaCSV implements ActionListener{
 		}
 		
 		public void verificaTipo(String[] p) throws SQLException, ClassNotFoundException, IOException{
+			
+			/*
+			 * verifica o caminho do arquivo especificado, checa palavra por palavra do caminho até ser compativel com o nome
+			 * do CSV especifico
+			 * ex: /home/osvaldoairon/Documentos/praias.csv
+			 *  ValidaPraia é igual a home?, osvaldoairon? ,Documentos?, praias.csv?
+			 *  se sim ele carrega os metodos do CSV. 
+			 */
+			
+			
 			String validaPraia = "praias.csv";
 			String validaMunicipio ="municipios.csv";
 			String validaAtrativo = "atrativoTuristico.csv";
@@ -125,6 +135,13 @@ public class InterfaceBuscaCSV implements ActionListener{
 		}
 		
 		public static void carregarPraias(String patch) throws SQLException{
+			
+			/*
+			 * 	Tem como parametro o caminho do arquivo csv especificado.
+			 * carrega a classe LoaderCSV que vai pegar os dados do CSV
+			 * em seguida guarda a lista de objetos "Praias" no banco de dados chamando a classe praiaControl
+			 */
+			
 			LoaderCSV loader_praia = new LoaderCSV();
 			
 			Praia_control praia = new Praia_control();
@@ -142,6 +159,7 @@ public class InterfaceBuscaCSV implements ActionListener{
 			LoaderCSV loader_atrativo = new LoaderCSV();
 
 			AtrativoTuristico_control a = new AtrativoTuristico_control();
+			
 			lista_Atrativo = loader_atrativo.lerArquivosCSV_AtrativoTuristico(patch);
 			if(lista_Atrativo!=null){
 				for(int i = 0 ; i <lista_Atrativo.size();i++){
