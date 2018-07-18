@@ -15,14 +15,16 @@ public class Municipios_control {
 		 * Esse metodo verifica se ja existe dados existentes entre o banco de dados e o CSV
 		 * 
 		 */
-		String sql = "SELECT nome,estado FROM municipios";
+		String sql = "SELECT nome_cidade,estado,latitude,longitude FROM municipios";
 		PreparedStatement statement =(PreparedStatement)cx.prepareStatement(sql);
 		
 		ResultSet result = statement.executeQuery();
 		while(result.next()){
-			String name = result.getString("nome");
+			String name = result.getString("nome_cidade");
 			String estado = result.getString("estado");
-			if(city.getNome().equals(name) && city.getEstado().equals(estado)){
+			Double lat = result.getDouble("latitude");
+			Double longi = result.getDouble("longitude");
+			if(city.getNomecidade().equals(name) && city.getEstado().equals(estado) && city.getLatitude()==lat && city.getLongitude() == longi){
 				// daado ja esta incluso
 				return true;
 			}
@@ -36,20 +38,29 @@ public class Municipios_control {
 	public void addMunicipio(Municipios municipios) throws ClassNotFoundException, SQLException{
 		
 		if(verificaDados(municipios)){
-			System.out.println("dado ja add");
+			System.err.println("dado ja add");
 		}else{
 			try{
 				Connection cx = ConfBanco.getConnection();
-				String sql = "INSERT INTO municipios(cep,area_territorial,estado,latitude,longitude,nome,populacao,site) VALUES(?,?,?,?,?,?,?,?)";
+				String sql = "INSERT INTO municipios(date,nome_cidade,descricao,area_territorial,latitude,longitude,estado,populacao,site,informacoes_relevantes,email_responsavel_preenchimento, nome_responsavel_preenchimento, contatos_responsavel_preenchimento,fonte_informacoes) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+				
+				
 				PreparedStatement statement = (PreparedStatement)cx.prepareStatement(sql);
-				statement.setString(1, municipios.getCep());
-				statement.setString(2, municipios.getAreaTerritorial());
-				statement.setString(3, municipios.getEstado());
-				statement.setDouble(4,municipios.getLatitude());
-				statement.setDouble(5, municipios.getLongitude());
-				statement.setString(6, municipios.getNome());
-				statement.setInt(7, municipios.getPopulacao());
-				statement.setString(8, municipios.getSite());
+				statement.setString(1, municipios.getDate());
+				statement.setString(2, municipios.getNomecidade());
+				statement.setString(3, municipios.getDescricao());
+				statement.setString(4, municipios.getAreaTerritorial());
+				statement.setDouble(5, municipios.getLatitude());
+				statement.setDouble(6, municipios.getLongitude());
+				statement.setString(7, municipios.getEstado());
+				statement.setInt(8,municipios.getPopulacao());
+				statement.setString(9, municipios.getSite());
+				statement.setString(10,municipios.getInformacoesRelevantes());
+				statement.setString(11, municipios.getEmail_responsavel());
+				statement.setString(12, municipios.getNome_responsavel());
+				statement.setString(13, municipios.getContatos_responsavel());
+				statement.setString(14, municipios.getFonte_informacoes());
+				
 				
 				statement.execute();
 				statement.close();

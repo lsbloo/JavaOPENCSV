@@ -88,7 +88,7 @@ public class LoaderCSV {
 	}
 	public ArrayList<Municipios> lerArquivosCSV_Municipio(String caminhoCSV) throws IOException{
 		/*
-		 * Cria um objeto do tipo leitorCsv que carregar um arquivo do tipo csv;
+		 * Cria um objeto do tipo leitorCsv que carrega um arquivo do tipo csv;
 		 * é necessario passar um caminho do arquivo para que ele carregue;
 		 * foi criado um array de string que percorre a cada iteraçcao do leitor
 		 * cada campo é separado por virgula, desse modo ele retorna os dados da coluna 0
@@ -119,19 +119,24 @@ public class LoaderCSV {
 					System.out.println("Preencha os dados corretamente/1");	
 				}
 				else{
-					String data = retireAspas(leitorLinhas[0].trim());
-					String cep = retireAspas(leitorLinhas[1].trim());
-					String area = retireAspas(leitorLinhas[2].trim());
-					String estado = retireAspas(leitorLinhas[3].trim());
-					String latitude = retireAspas(leitorLinhas[4].trim());
-					String longitude = retireAspas(leitorLinhas[5].trim());
-					String nome =retireAspas(leitorLinhas[6].trim());
-					String populacao = retireAspas(leitorLinhas[7].trim());
-					String site = retireAspas(leitorLinhas[8]);
+					String data = leitorLinhas[0].trim();
+					String nomeCidade = leitorLinhas[1].trim();
+					String descricao = leitorLinhas[2].trim();
+					String area = leitorLinhas[3].trim();
+					String latitude = leitorLinhas[4].trim();
+					String longitude = leitorLinhas[5].trim();
+					String estado = leitorLinhas[6].trim();
+					String populacao = leitorLinhas[7].trim();
+					String site = leitorLinhas[8].trim();
+					String inf_relevante = leitorLinhas[9].trim();
+					String email_responsavel = leitorLinhas[10].trim();
+					String nome_responsavel = leitorLinhas[11].trim();
+					String contato_responsavel = leitorLinhas[12].trim();
+					String fonte_inf = leitorLinhas[13].trim();
 			
 		
 					
-					list_mun.add(new Municipios(data,cep,area,estado,Double.parseDouble(latitude),Double.parseDouble(longitude),nome,Integer.parseInt(populacao),site));
+					list_mun.add(new Municipios(data,nomeCidade,descricao,area,Double.parseDouble(latitude),Double.parseDouble(longitude),estado,Integer.parseInt(populacao),site,inf_relevante, email_responsavel, nome_responsavel , contato_responsavel,fonte_inf));
 					
 					/*
 					 * Cria um txt com os dados que foram inseridos no banco;
@@ -141,9 +146,43 @@ public class LoaderCSV {
 				
 				
 			}
-		}catch(Exception e){
-			e.printStackTrace();
+		}catch(NumberFormatException e){
+				CSVReader leitor = new CSVReader(new FileReader(caminhoCSV),',', '\t',1);
+				String[] leitorLinhas;
+			
+				while((leitorLinhas=leitor.readNext()) != null){
+				int x = leitorLinhas.length -1;
+				
+				if(leitorLinhas[0].isEmpty() || leitorLinhas[1].isEmpty() || leitorLinhas[2].isEmpty() || leitorLinhas[5].isEmpty() || leitorLinhas[7].isEmpty()){
+					System.out.println("Preencha os dados corretamente/1");	
+				}
+				else{
+					String data = retireAspas(leitorLinhas[0].trim());
+					String nomeCidade = retireAspas(leitorLinhas[1].trim());
+					String descricao = retireAspas(leitorLinhas[2].trim());
+					String area = retireAspas(leitorLinhas[3].trim());
+					String latitude = retireAspas(leitorLinhas[4].trim());
+					String longitude = retireAspas(leitorLinhas[5].trim());
+					String estado = retireAspas(leitorLinhas[6].trim());
+					String populacao = retireAspas(leitorLinhas[7].trim());
+					String site = retireAspas(leitorLinhas[8]);
+					String inf_relevante = retireAspas(leitorLinhas[9].trim());
+					String email_responsavel = retireAspas(leitorLinhas[10].trim());
+					String nome_responsavel = retireAspas(leitorLinhas[11].trim());
+					String contato_responsavel = retireAspas(leitorLinhas[12].trim());
+					String fonte_inf = retireAspas(leitorLinhas[13].trim());
+			
+		
+					
+					list_mun.add(new Municipios(data,nomeCidade,descricao,area,Double.parseDouble(latitude),Double.parseDouble(longitude),estado,Integer.parseInt(populacao),site,inf_relevante, email_responsavel, nome_responsavel , contato_responsavel,fonte_inf));
+					
+					/*
+					 * Cria um txt com os dados que foram inseridos no banco;
+					 */
+					salvaLogs_municipios(list_mun , caminhoCSV);
+				}
 		}
+	}
 		System.err.println("Tamanho da lista"+list_mun.size());
 		return list_mun;
 	}
@@ -307,7 +346,7 @@ public class LoaderCSV {
 
 				dados_muncipio = "Área Territórial: " + list.get(i).getAreaTerritorial() + "\r\n" + "CEP: " + list.get(i).getCep()
 						+ "\r\n" + "Estado: " + list.get(i).getEstado() + "\r\n" + "Latitude: " + list.get(i).getLatitude()
-						+ "\r\n" + "Longitude: " + list.get(i).getLongitude() + "\r\n" + "Nome: " + list.get(i).getNome() + "\r\n" + "População: " + list.get(i).getPopulacao()
+						+ "\r\n" + "Longitude: " + list.get(i).getLongitude() + "\r\n" + "Nome: " + list.get(i).getNomecidade() + "\r\n" + "População: " + list.get(i).getPopulacao()
 						+ "\r\n" + "Site: " + list.get(i).getSite() + "\r\n" + "----------------------------------------------------------------------------------------------------------------" + "\r\n";
 				
 				arq.write("\r\n");
@@ -331,8 +370,11 @@ public class LoaderCSV {
 		  * Nao encontrei um metodo na classe String que retira-se os espaços que o CSV do GOOGLE FORMS CRIA,
 		  * entao criei esse metodo para retirar as aspas entre os atributos do municipios cadastrados no CSV
 		  * a ideia do nome do arquivo ainda continua a mesma (municipios.csv ««); or atrativosTUristicos;
+		  * 
+		  * 
 		  */
 		//System.err.println("saida" + string);
+		 
 		String saida2 = null;
 		String saida_normal = null;
 		String x = null;
