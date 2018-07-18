@@ -32,6 +32,7 @@ public class InterfaceBuscaCSV implements ActionListener{
 	private static ArrayList<AtrativoTuristico> lista_Atrativo = new ArrayList<AtrativoTuristico>();
 	private static ArrayList<Praia> list_praia = new ArrayList<Praia>();
 	private static String caminho;
+	private static String path_log;
 	
 	private static JButton localizararq;
 	private static JTextField dir;
@@ -73,15 +74,20 @@ public class InterfaceBuscaCSV implements ActionListener{
 		            dir.setText("");
 		        } else {
 		            File arquivo = arquivocsv.getSelectedFile();
-		            dir.setText(arquivo.getPath());
+		            dir.setText(arquivo.getAbsolutePath());
 		
-		            caminho = arquivo.toString();
+		           caminho = arquivo.getAbsolutePath().toString();
+		           path_log = arquivo.getParent();
+		           System.out.println("PATCH LOG_" + path_log);
+		           
+		           String nomearq = arquivo.getName();
+		           
 		           System.out.println(arquivo.toString());
-		           String[] verific = caminho.split("/");
+		           System.out.println("xdxd: "+nomearq);
 		           
 		           
 		           try {
-					verificaTipo(verific);
+					verificaTipo(nomearq);
 				} catch (SQLException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -99,7 +105,7 @@ public class InterfaceBuscaCSV implements ActionListener{
 			}
 		}
 		
-		public void verificaTipo(String[] p) throws SQLException, ClassNotFoundException, IOException{
+		public void verificaTipo(String p) throws SQLException, ClassNotFoundException, IOException{
 			
 			/*
 			 * verifica o caminho do arquivo especificado, checa palavra por palavra do caminho até ser compativel com o nome
@@ -114,27 +120,26 @@ public class InterfaceBuscaCSV implements ActionListener{
 			String validaMunicipio ="municipios.csv";
 			String validaAtrativo = "atrativoTuristico.csv";
 			boolean inter=false;
-			for(int i = 0 ; i < p.length;i++){
-				if(p[i].equals(validaPraia)){
+				if(p.equals(validaPraia)){
 					carregarPraias(caminho);
 					inter = false;
-				}else if(p[i].equals(validaMunicipio)){
-					carregarMunicipios(caminho);
+				}else if(p.equals(validaMunicipio)){
+					carregarMunicipios(caminho, path_log);
 					inter = false;
-				}else if(p[i].equals(validaAtrativo)){
+				}else if(p.equals(validaAtrativo)){
 					carregarAtrativosTuristicos(caminho);
 					inter =false;
 				}else{
 					inter=true;
 				}
-			}
+			
 			if(inter){
 				dir.setText("CSV válido nao encontrado!");
 				JOptionPane.showMessageDialog(null, "Porfavor coloque um arquivo com os requisitos necessários");
 			}
 		}
 		
-		public static void carregarPraias(String patch) throws SQLException{
+		public static void carregarPraias(String patch) throws SQLException, ClassNotFoundException{
 			
 			/*
 			 * 	Tem como parametro o caminho do arquivo csv especificado.
@@ -155,7 +160,7 @@ public class InterfaceBuscaCSV implements ActionListener{
 				JOptionPane.showMessageDialog(null, "Dados do tipo Praias foram inseridos");
 			}
 		}
-		public static void carregarAtrativosTuristicos(String patch) throws SQLException{
+		public static void carregarAtrativosTuristicos(String patch) throws SQLException, ClassNotFoundException{
 			LoaderCSV loader_atrativo = new LoaderCSV();
 
 			AtrativoTuristico_control a = new AtrativoTuristico_control();
@@ -170,11 +175,11 @@ public class InterfaceBuscaCSV implements ActionListener{
 			
 		}
 		
-		public static void carregarMunicipios(String patch) throws IOException, ClassNotFoundException, SQLException{
+		public static void carregarMunicipios(String patch, String path_log) throws IOException, ClassNotFoundException, SQLException{
 			LoaderCSV loader_muncipios = new LoaderCSV();
 			Municipios_control n = new Municipios_control();
 			
-			lista_municipios = loader_muncipios.lerArquivosCSV_Municipio(patch);
+			lista_municipios = loader_muncipios.lerArquivosCSV_Municipio(patch, path_log);
 			
 			if(lista_municipios!=null){
 				for(int i =0 ; i<lista_municipios.size();i++){

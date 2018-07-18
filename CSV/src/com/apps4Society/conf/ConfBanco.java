@@ -4,11 +4,13 @@ public class ConfBanco {
 	
 	
 	
-	public static Connection getConnection() throws SQLException{
-		String url = "jdbc:postgresql://localhost:5432/apps4Society";
+	public static Connection getConnection() throws SQLException, ClassNotFoundException{
+		
+		Class.forName("org.postgresql.Driver");
+		
+		String url = "jdbc:postgresql://192.168.31.143:5432/apps4Society";
 		
 		Connection com = DriverManager.getConnection(url,"postgres","admin");
-		
 		
 		return com;
 	}

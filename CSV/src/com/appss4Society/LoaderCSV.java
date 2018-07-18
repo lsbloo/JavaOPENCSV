@@ -86,12 +86,12 @@ public class LoaderCSV {
 		System.err.println("Tamanho da lista praia"+list_praias.size());
 		return list_praias;
 	}
-	public ArrayList<Municipios> lerArquivosCSV_Municipio(String caminhoCSV) throws IOException{
+	public ArrayList<Municipios> lerArquivosCSV_Municipio(String caminhoCSV, String path_log) throws IOException{
 		/*
 		 * Cria um objeto do tipo leitorCsv que carrega um arquivo do tipo csv;
-		 * é necessario passar um caminho do arquivo para que ele carregue;
-		 * foi criado um array de string que percorre a cada iteraçcao do leitor
-		 * cada campo é separado por virgula, desse modo ele retorna os dados da coluna 0
+		 * Ã© necessario passar um caminho do arquivo para que ele carregue;
+		 * foi criado um array de string que percorre a cada iteraÃ§cao do leitor
+		 * cada campo Ã© separado por virgula, desse modo ele retorna os dados da coluna 0
 		 */
 		
 		/*
@@ -108,6 +108,7 @@ public class LoaderCSV {
 		 */
 		try{
 			
+			@SuppressWarnings("deprecation")
 			CSVReader leitor = new CSVReader(new FileReader(caminhoCSV),',', '\t',1);
 			String[] leitorLinhas;
 			
@@ -138,10 +139,7 @@ public class LoaderCSV {
 					
 					list_mun.add(new Municipios(data,nomeCidade,descricao,area,Double.parseDouble(latitude),Double.parseDouble(longitude),estado,Integer.parseInt(populacao),site,inf_relevante, email_responsavel, nome_responsavel , contato_responsavel,fonte_inf));
 					
-					/*
-					 * Cria um txt com os dados que foram inseridos no banco;
-					 */
-					salvaLogs_municipios(list_mun , caminhoCSV);
+	
 				}
 				
 				
@@ -176,14 +174,21 @@ public class LoaderCSV {
 					
 					list_mun.add(new Municipios(data,nomeCidade,descricao,area,Double.parseDouble(latitude),Double.parseDouble(longitude),estado,Integer.parseInt(populacao),site,inf_relevante, email_responsavel, nome_responsavel , contato_responsavel,fonte_inf));
 					
-					/*
-					 * Cria um txt com os dados que foram inseridos no banco;
-					 */
-					salvaLogs_municipios(list_mun , caminhoCSV);
+					
 				}
 		}
 	}
-		System.err.println("Tamanho da lista"+list_mun.size());
+		
+		
+		/*
+		 * Cria um txt com os dados que foram inseridos no banco;
+		 */
+		if(list_mun.size() != 0){
+			int tamanhoVetor = list_mun.size();
+			salvaLogs_municipios(list_mun , path_log , tamanhoVetor);
+			
+			System.err.println("Tamanho da lista"+list_mun.size());
+		}
 		return list_mun;
 	}
 	
@@ -243,23 +248,23 @@ public class LoaderCSV {
 			}
 
 			FileWriter arq = new FileWriter(file);
-			arq.write("--------------- Relatório de Praias Salvos pelo Sistema ---------------------");
+			arq.write("--------------- RelatÃ³rio de Praias Salvos pelo Sistema ---------------------");
 			arq.write("\r\n");
 			for (int i = 0; i < list.size(); i++) {
 
 				if(list.get(i).getPerigoTubarao()){
 					saidacorretaTubarao="sim";
 				}else{
-					saidacorretaTubarao="não";
+					saidacorretaTubarao="nÃ£o";
 				}
 				if(list.get(i).getPropiaBanho()){
 					saidacorretaBanho="sim";
 				}else{
-					saidacorretaBanho="não";
+					saidacorretaBanho="nÃ£o";
 				}
 				dados_turismo = "Nome: " + list.get(i).getNome() + "\r\n" + "Como chegar: " + list.get(i).getComochegar()
-						+ "\r\n" + "Descrição: " + list.get(i).getDescricao() + "\r\n" + "Latitude: " + list.get(i).getLatitude()
-						+ "\r\n" + "Longitude: " + list.get(i).getLongitude() + "\r\n" + "Infomação Contato: " + list.get(i).getInfo_contato() + "\r\n" +
+						+ "\r\n" + "DescriÃ§Ã£o: " + list.get(i).getDescricao() + "\r\n" + "Latitude: " + list.get(i).getLatitude()
+						+ "\r\n" + "Longitude: " + list.get(i).getLongitude() + "\r\n" + "InfomaÃ§Ã£o Contato: " + list.get(i).getInfo_contato() + "\r\n" +
 						"\r\n" + "Perigo Tubarao: " + saidacorretaTubarao +  "\r\n"+"Propria para banho?: " +saidacorretaBanho +"\r\n "+ "TIPO DA ORLA: "+list.get(i).getTipoOrla()  +"\r\n" + "----------------------------------------------------------------------------------------------------------------" + "\r\n";
 				
 				arq.write("\r\n");
@@ -282,7 +287,7 @@ public class LoaderCSV {
 		try {
 			// File file = new
 			/*
-			 * SALVA OS DADOS ARMAZENADOS EM UM ARQUIVO TXT QUE SERVE COMO REGISTRO DA OPERAÇÃO.
+			 * SALVA OS DADOS ARMAZENADOS EM UM ARQUIVO TXT QUE SERVE COMO REGISTRO DA OPERAÃ‡ÃƒO.
 			 */
 			
 			
@@ -299,13 +304,13 @@ public class LoaderCSV {
 			}
 
 			FileWriter arq = new FileWriter(file);
-			arq.write("--------------- Relatório de Atrativos Turisticos Salvos pelo Sistema ---------------------");
+			arq.write("--------------- RelatÃ³rio de Atrativos Turisticos Salvos pelo Sistema ---------------------");
 			arq.write("\r\n");
 			for (int i = 0; i < list.size(); i++) {
 
 				dados_turismo = "Nome: " + list.get(i).getNome() + "\r\n" + "Como chegar: " + list.get(i).getComoChegar()
-						+ "\r\n" + "Descrição: " + list.get(i).getDescricao() + "\r\n" + "Latitude: " + list.get(i).getLatitude()
-						+ "\r\n" + "Longitude: " + list.get(i).getLongitude() + "\r\n" + "Infomação Contato: " + list.get(i).getInfoContato() + "\r\n" +
+						+ "\r\n" + "DescriÃ§Ã£o: " + list.get(i).getDescricao() + "\r\n" + "Latitude: " + list.get(i).getLatitude()
+						+ "\r\n" + "Longitude: " + list.get(i).getLongitude() + "\r\n" + "InfomaÃ§Ã£o Contato: " + list.get(i).getInfoContato() + "\r\n" +
 						"\r\n" + "Site: " + list.get(i).getSite() + "\r\n" + "----------------------------------------------------------------------------------------------------------------" + "\r\n";
 				
 				arq.write("\r\n");
@@ -325,28 +330,29 @@ public class LoaderCSV {
 	}
 	
 	
-	public void salvaLogs_municipios(ArrayList<Municipios> list , String caminhoCSV){
+	public void salvaLogs_municipios(ArrayList<Municipios> list , String caminhoCSV, int lenLista) throws FileNotFoundException{
 		
 		try {
 			// File file = new
 			
 			
 			
-			File file = new File("/home/osvaldoairon/Documentos/Municipios_LOG.txt"); // quebra de linha \r\n
+			File file = new File(caminhoCSV); // quebra de linha \r\n
 			String dados_muncipio = "";
 			String conteudo;
+			int lenListaCity = lenLista;
 			if(file!=null){
 				System.out.println("Arquivo criado");
 			}
 
 			FileWriter arq = new FileWriter(file);
-			arq.write("--------------- Relatório de Municipios Salvos pelo Sistema ---------------------");
+			arq.write("--------------- RelatÃ³rio de Municipios Salvos pelo Sistema ---------------------");
 			arq.write("\r\n");
 			for (int i = 0; i < list.size(); i++) {
 
-				dados_muncipio = "Área Territórial: " + list.get(i).getAreaTerritorial() + "\r\n" + "CEP: " + list.get(i).getCep()
+				dados_muncipio = "Ã�rea TerritÃ³rial: " + list.get(i).getAreaTerritorial() + "\r\n" + "CEP: " + list.get(i).getCep()
 						+ "\r\n" + "Estado: " + list.get(i).getEstado() + "\r\n" + "Latitude: " + list.get(i).getLatitude()
-						+ "\r\n" + "Longitude: " + list.get(i).getLongitude() + "\r\n" + "Nome: " + list.get(i).getNomecidade() + "\r\n" + "População: " + list.get(i).getPopulacao()
+						+ "\r\n" + "Longitude: " + list.get(i).getLongitude() + "\r\n" + "Nome: " + list.get(i).getNomecidade() + "\r\n" + "PopulaÃ§Ã£o: " + list.get(i).getPopulacao()
 						+ "\r\n" + "Site: " + list.get(i).getSite() + "\r\n" + "----------------------------------------------------------------------------------------------------------------" + "\r\n";
 				
 				arq.write("\r\n");
@@ -356,6 +362,8 @@ public class LoaderCSV {
 				arq.write(conteudo);
 
 			}
+			arq.write("\r\n");
+			arq.write("Quantidade de Municipios Armazenados: " + lenListaCity);
 			arq.write("\r\n");
 			arq.write("Armazenados com sucesso!");
 			arq.close();
@@ -367,9 +375,9 @@ public class LoaderCSV {
 	
 	public String retireAspas(String string){
 		 /*
-		  * Nao encontrei um metodo na classe String que retira-se os espaços que o CSV do GOOGLE FORMS CRIA,
+		  * Nao encontrei um metodo na classe String que retira-se os espaÃ§os que o CSV do GOOGLE FORMS CRIA,
 		  * entao criei esse metodo para retirar as aspas entre os atributos do municipios cadastrados no CSV
-		  * a ideia do nome do arquivo ainda continua a mesma (municipios.csv ««); or atrativosTUristicos;
+		  * a ideia do nome do arquivo ainda continua a mesma (municipios.csv Â«Â«); or atrativosTUristicos;
 		  * 
 		  * 
 		  */

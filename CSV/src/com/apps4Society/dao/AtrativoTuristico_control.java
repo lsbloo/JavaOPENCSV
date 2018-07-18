@@ -9,7 +9,7 @@ import java.sql.SQLException;
 public class AtrativoTuristico_control {
 	
 	
-	public boolean verificaAtrativoTuristico(AtrativoTuristico at) throws SQLException{
+	public boolean verificaAtrativoTuristico(AtrativoTuristico at) throws SQLException, ClassNotFoundException{
 		Connection cx = ConfBanco.getConnection();
 		String sql = "SELECT nome,como_chegar FROM atrativos_turisticos";
 		PreparedStatement st = (PreparedStatement)cx.prepareStatement(sql);
@@ -27,7 +27,7 @@ public class AtrativoTuristico_control {
 		return false;
 	}
 	
-	public void addAtratativoTuristico(AtrativoTuristico aTuristico) throws SQLException{
+	public void addAtratativoTuristico(AtrativoTuristico aTuristico) throws SQLException, ClassNotFoundException{
 		
 		if(verificaAtrativoTuristico(aTuristico)){
 			System.out.println("Atrativo turistico ja foi adicionado no banco");

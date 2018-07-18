@@ -9,7 +9,7 @@ import com.apps4Society.model.*;
 public class Municipios_control {
 	
 	
-	public boolean verificaDados(Municipios city) throws SQLException{
+	public boolean verificaDados(Municipios city) throws SQLException, ClassNotFoundException{
 		Connection cx = ConfBanco.getConnection();
 		/*
 		 * Esse metodo verifica se ja existe dados existentes entre o banco de dados e o CSV

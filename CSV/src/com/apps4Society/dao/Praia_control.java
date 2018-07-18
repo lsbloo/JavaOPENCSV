@@ -11,7 +11,7 @@ import com.apps4Society.model.Praia;
 
 public class Praia_control {
 	
-	public boolean verificaDadosPraia(Praia p) throws SQLException{
+	public boolean verificaDadosPraia(Praia p) throws SQLException, ClassNotFoundException{
 		Connection cx = ConfBanco.getConnection();
 		/*
 		 * Esse metodo verifica se ja existe dados existentes entre o banco de dados e o CSV
@@ -37,7 +37,7 @@ public class Praia_control {
 		
 	}
 	
-	public void addPraia(Praia praia) throws SQLException{
+	public void addPraia(Praia praia) throws SQLException, ClassNotFoundException{
 		
 		if(verificaDadosPraia(praia)){
 			System.err.println("dado praia ja add ");
