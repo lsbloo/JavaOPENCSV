@@ -108,7 +108,6 @@ public class LoaderCSV {
 		 */
 		try{
 			
-			@SuppressWarnings("deprecation")
 			CSVReader leitor = new CSVReader(new FileReader(caminhoCSV),',', '\t',1);
 			String[] leitorLinhas;
 			
@@ -145,6 +144,8 @@ public class LoaderCSV {
 				
 			}
 		}catch(NumberFormatException e){
+			
+				@SuppressWarnings("deprecation")
 				CSVReader leitor = new CSVReader(new FileReader(caminhoCSV),',', '\t',1);
 				String[] leitorLinhas;
 			
@@ -330,14 +331,14 @@ public class LoaderCSV {
 	}
 	
 	
-	public void salvaLogs_municipios(ArrayList<Municipios> list , String caminhoCSV, int lenLista) throws FileNotFoundException{
+	public void salvaLogs_municipios(ArrayList<Municipios> list , String caminhoCSV, int lenLista){
 		
 		try {
 			// File file = new
 			
 			
 			
-			File file = new File(caminhoCSV); // quebra de linha \r\n
+			File file = new File("caminhoCSV"); // quebra de linha \r\n
 			String dados_muncipio = "";
 			String conteudo;
 			int lenListaCity = lenLista;

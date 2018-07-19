@@ -76,14 +76,14 @@ public class InterfaceBuscaCSV implements ActionListener{
 		            File arquivo = arquivocsv.getSelectedFile();
 		            dir.setText(arquivo.getAbsolutePath());
 		
-		           caminho = arquivo.getAbsolutePath().toString();
-		           path_log = arquivo.getParent();
-		           System.out.println("PATCH LOG_" + path_log);
+		            caminho = arquivo.getAbsolutePath().toString();
+		            path_log = arquivo.getParent();
+		            
+		            String nomearq = arquivo.getName();
+		            System.out.println(arquivo.toString());
 		           
-		           String nomearq = arquivo.getName();
 		           
-		           System.out.println(arquivo.toString());
-		           System.out.println("xdxd: "+nomearq);
+		           
 		           
 		           
 		           try {
@@ -120,11 +120,12 @@ public class InterfaceBuscaCSV implements ActionListener{
 			String validaMunicipio ="municipios.csv";
 			String validaAtrativo = "atrativoTuristico.csv";
 			boolean inter=false;
+			
 				if(p.equals(validaPraia)){
 					carregarPraias(caminho);
 					inter = false;
 				}else if(p.equals(validaMunicipio)){
-					carregarMunicipios(caminho, path_log);
+					carregarMunicipios(caminho , path_log);
 					inter = false;
 				}else if(p.equals(validaAtrativo)){
 					carregarAtrativosTuristicos(caminho);

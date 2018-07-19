@@ -8,9 +8,17 @@ public class ConfBanco {
 		
 		Class.forName("org.postgresql.Driver");
 		
-		String url = "jdbc:postgresql://192.168.31.143:5432/apps4Society";
+		// [e necessario criar uma conexao SSL - com o banco de dados externo
+		// arquivos de configuracoes do post-
+		// cd data - nano postgresql.conf e nano pg_hba.conf
+		// criterios para o SSL alterar os arquivos de configuracoes a cima
+		// utilizar o comando opensSL para gerar um certificado e validar
+		// alguns arquivos vao ser necessarios tb armazenando a key
 		
-		Connection com = DriverManager.getConnection(url,"postgres","admin");
+		String url = "jdbc:postgresql://192.168.31.143:5444/apps4Society";
+		
+		Connection com = DriverManager.getConnection(url,"postgres","6036236");
+		
 		
 		return com;
 	}
