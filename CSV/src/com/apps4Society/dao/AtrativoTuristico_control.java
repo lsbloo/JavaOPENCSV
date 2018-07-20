@@ -32,7 +32,6 @@ public class AtrativoTuristico_control {
 		
 		if(verificaAtrativoTuristico(aTuristico)){
 			System.out.println("Atrativo turistico ja foi adicionado no banco");
-			//System.err.println("XDXDD??" + aTuristico.getContato_responsavel_preenchimento());
 		}else{
 			try{
 				Connection cx = ConfBanco.getConnection();
@@ -54,6 +53,7 @@ public class AtrativoTuristico_control {
 				statement.setString(13, aTuristico.getEmail_responsavel_preenchimento());
 				statement.setString(14, aTuristico.getNome_responsavel_preenchimento());
 				statement.setString(15, aTuristico.getContato_responsavel_preenchimento());
+				//System.err.println("XDXDD??" + aTuristico.getContato_responsavel_preenchimento());
 				statement.setString(16, aTuristico.getFonte_informacoes());
 				statement.setString(17, aTuristico.getNome_responsavel_atrativo());
 				statement.setString(18, aTuristico.getContato_responsavel_atrativo());
