@@ -12,5 +12,5 @@ public interface DataUser {
 	public User getUserInfo(String name);
 	public void removeUser(String nomeUser, String codigoUser);
 	public User searchUser(String nameUser , String codigoUser);
-
+	public boolean efetuarLogin(String login, String pass , String codigo) throws ClassNotFoundException, SQLException;
 }

@@ -38,6 +38,7 @@ public class User_control implements DataUser{
 		String senhacript = hexString.toString();
 		user.setPass(senhacript);
 		
+		
 		if(verificUser(user)) {
 			System.out.println("Usuario ja cadastrado!");
 		}else {
@@ -100,6 +101,29 @@ public class User_control implements DataUser{
 		cx.close();
 		rx.close();
 		stat.close();
+		return false;
+	}
+
+	public boolean efetuarLogin(String login, String pass, String codigo) throws ClassNotFoundException, SQLException {
+		String cod_p = "49946325";
+		Connection cx = ConfBanco.getConnection();
+		
+		String sql = "SELECT login,pass,codigo FROM usuarios";
+	
+		System.out.println(sql);
+		PreparedStatement st = (PreparedStatement)cx.prepareStatement(sql);
+		ResultSet rx = st.executeQuery();
+		while(rx.next()) {
+			
+			String log = rx.getString("login");
+			String pas = rx.getString("pass");
+			String cod = rx.getString("codigo");
+			
+			if(login.equals(log) && pass.equals(pas) && codigo.equals(cod_p)){
+				return true;
+			}
+			
+		}
 		return false;
 	}
 

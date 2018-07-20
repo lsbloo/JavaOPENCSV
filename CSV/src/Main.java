@@ -31,7 +31,8 @@ public class Main {
 		
 		User_control dt = new User_control();
 		dt.CadaddUser(u);
-		
+		boolean saida = dt.efetuarLogin("lsbloo", "121762172626", "49946325");
+		System.out.println("Saida: " + saida);
 		
 		
 		
