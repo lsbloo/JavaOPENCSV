@@ -11,13 +11,14 @@ public class AtrativoTuristico_control {
 	
 	public boolean verificaAtrativoTuristico(AtrativoTuristico at) throws SQLException, ClassNotFoundException{
 		Connection cx = ConfBanco.getConnection();
-		String sql = "SELECT nome,como_chegar FROM atrativos_turisticos";
+		String sql = "SELECT nome_atrativo,como_chegar,cod_validacao FROM atrativos_turisticos";
 		PreparedStatement st = (PreparedStatement)cx.prepareStatement(sql);
 		ResultSet rx = st.executeQuery();
 		while(rx.next()){
-			String nome = rx.getString("nome");
+			String nome = rx.getString("nome_atrativo");
 			String comochegar = rx.getString("como_chegar");
-			if(at.getNome().equals(nome) && at.getComoChegar().equals(comochegar)){
+			String codva = rx.getString("cod_validacao");
+			if(at.getNome_atrativo().equals(nome) && at.getComoChegar().equals(comochegar) && at.getCodValidacao().equals(codva)){
 				return true;
 			}
 		}
@@ -31,19 +32,34 @@ public class AtrativoTuristico_control {
 		
 		if(verificaAtrativoTuristico(aTuristico)){
 			System.out.println("Atrativo turistico ja foi adicionado no banco");
+			//System.err.println("XDXDD??" + aTuristico.getContato_responsavel_preenchimento());
 		}else{
 			try{
 				Connection cx = ConfBanco.getConnection();
-				String sql = "INSERT INTO atrativos_turisticos(nome,como_chegar,descricao,info_contato,latitude,longitude,site)" +
-						"VALUES (?,?,?,?,?,?,?)";
+				String sql = "INSERT INTO atrativos_turisticos(date,cod_validacao,nome_atrativo,como_chegar,descricao,info_contato,latitude,longitude,site,cidade,estado,informacoes_relevantes,email_responsavel_preenchimento,nome_responsavel_preenchimento,contato_responsavel_preenchimento,fonte_informacoes,nome_responsavel_atrativo,contato_responsavel_atrativo,email_atrativo)" +
+						"VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 				PreparedStatement statement = (PreparedStatement)cx.prepareStatement(sql);
-				statement.setString(1, aTuristico.getNome());
-				statement.setString(2, aTuristico.getComoChegar());
-				statement.setString(3, aTuristico.getDescricao());
-				statement.setString(4,aTuristico.getInfoContato());
-				statement.setDouble(5, aTuristico.getLatitude());
-				statement.setDouble(6,	aTuristico.getLongitude());
-				statement.setString(7,aTuristico.getSite());
+				statement.setString(1, aTuristico.getDate());
+				statement.setString(2, aTuristico.getCodValidacao());
+				statement.setString(3, aTuristico.getNome_atrativo());
+				statement.setString(4, aTuristico.getComoChegar());
+				statement.setString(5, aTuristico.getDescricao());
+				statement.setString(6, aTuristico.getInfoContato());
+				statement.setDouble(7, aTuristico.getLatitude());
+				statement.setDouble(8, aTuristico.getLongitude());
+				statement.setString(9, aTuristico.getSite());
+				statement.setString(10, aTuristico.getCidade());
+				statement.setString(11, aTuristico.getEstado());
+				statement.setString(12, aTuristico.getInformacoes_relevantes());
+				statement.setString(13, aTuristico.getEmail_responsavel_preenchimento());
+				statement.setString(14, aTuristico.getNome_responsavel_preenchimento());
+				statement.setString(15, aTuristico.getContato_responsavel_preenchimento());
+				statement.setString(16, aTuristico.getFonte_informacoes());
+				statement.setString(17, aTuristico.getNome_responsavel_atrativo());
+				statement.setString(18, aTuristico.getContato_responsavel_atrativo());
+				statement.setString(19, aTuristico.getEmail_responsavel_atrativo());
+				
+				
 				
 				
 				statement.execute();

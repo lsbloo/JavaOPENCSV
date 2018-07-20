@@ -188,12 +188,12 @@ public class LoaderCSV {
 			int tamanhoVetor = list_mun.size();
 			salvaLogs_municipios(list_mun , path_log , tamanhoVetor);
 			
-			System.err.println("Tamanho da lista"+list_mun.size());
+			System.err.println("Tamanho da lista municipios: "+list_mun.size());
 		}
 		return list_mun;
 	}
 	
-	public ArrayList<AtrativoTuristico> lerArquivosCSV_AtrativoTuristico(String caminhoCSV){
+	public ArrayList<AtrativoTuristico> lerArquivosCSV_AtrativoTuristico(String caminhoCSV, String path) throws IOException{
 		/*
 		 * Indices para AtrativoTuristicos
 		 * 0 = data
@@ -212,24 +212,77 @@ public class LoaderCSV {
 				if(leitorLinhas[0].isEmpty() || leitorLinhas[1].isEmpty() || leitorLinhas[2].isEmpty() || leitorLinhas[3].isEmpty() || leitorLinhas[6].isEmpty()){
 					System.out.println("Preencha os dados corretamente/1");	
 				}else{
-					String data = retireAspas(leitorLinhas[0].trim());
-					String nome = retireAspas(leitorLinhas[1].trim());
-					String comoChegar = retireAspas(leitorLinhas[2].trim());
-					String descricao = retireAspas(leitorLinhas[3].trim());
-					String info_contato = retireAspas(leitorLinhas[4].trim());
-					String latitude = retireAspas(leitorLinhas[5].trim());
-					String longitude = retireAspas(leitorLinhas[6].trim());
-					String site = retireAspas(leitorLinhas[7].trim());
+						String date = leitorLinhas[0].trim();
+						String codValidacao = leitorLinhas[1].trim();
+						String nomeAtrativo = leitorLinhas[2].trim();
+						String comoChegar = leitorLinhas[3].trim();
+						String descricao = leitorLinhas[4].trim();
+						String infContato = leitorLinhas[5].trim();
+						double latitude = Double.parseDouble(leitorLinhas[6].trim());
+						double longitude = Double.parseDouble(leitorLinhas[7].trim());
+						String site = leitorLinhas[8].trim();
+						String cidade = leitorLinhas[9].trim();
+						String estado = leitorLinhas[10].trim();
+						String informacoes_relevantes = leitorLinhas[11].trim();
+						String email_responsavel = leitorLinhas[12].trim();
+						String nome_responsavel_preenchimento = leitorLinhas[13].trim();
+						String contato_responsavel_preenchimento = leitorLinhas[14].trim();
+						String fonte_inf = leitorLinhas[15].trim();
+						String nome_resp_at = leitorLinhas[16].trim();
+						String contato_resp_at = leitorLinhas[17].trim();
+						String email_resp_at = leitorLinhas[18].trim();
 					
-					list_atrativos.add(new AtrativoTuristico(data,nome,comoChegar,descricao,info_contato,Double.parseDouble(latitude),Double.parseDouble(longitude),site));
-					salvarLogs_turisticos(list_atrativos,caminhoCSV);
+					list_atrativos.add(new AtrativoTuristico(date,codValidacao,nomeAtrativo,comoChegar,descricao,infContato,latitude,longitude,site,cidade,estado,informacoes_relevantes,
+							email_responsavel,nome_responsavel_preenchimento,contato_responsavel_preenchimento,fonte_inf,nome_resp_at,contato_resp_at,
+							email_resp_at));
+					
 				}
 				
 			}
-		}catch(Exception e){
-			e.printStackTrace();
+		}catch(NumberFormatException e){
+			
+			
+			CSVReader leitor = new CSVReader(new FileReader(caminhoCSV),',', '\t',1);
+			String[] leitorLinhas;
+			while((leitorLinhas=leitor.readNext())!=null){
+				if(leitorLinhas[0].isEmpty() || leitorLinhas[1].isEmpty() || leitorLinhas[2].isEmpty() || leitorLinhas[3].isEmpty() || leitorLinhas[6].isEmpty()){
+					System.out.println("Preencha os dados corretamente/1");	
+				}else{
+						String date = retireAspas(leitorLinhas[0].trim());
+						String codValidacao =  retireAspas(leitorLinhas[1].trim());
+						String nomeAtrativo =  retireAspas(leitorLinhas[2].trim());
+						String comoChegar =  retireAspas(leitorLinhas[3].trim());
+						String descricao =  retireAspas(leitorLinhas[4].trim());
+						String infContato =  retireAspas(leitorLinhas[5].trim());
+						double latitude = Double.parseDouble( retireAspas(leitorLinhas[6].trim()));
+						double longitude = Double.parseDouble( retireAspas(leitorLinhas[7].trim()));
+						String site =  retireAspas(leitorLinhas[8].trim());
+						String cidade =  retireAspas(leitorLinhas[9].trim());
+						String estado =  retireAspas(leitorLinhas[10].trim());
+						String informacoes_relevantes =  retireAspas(leitorLinhas[11].trim());
+						String email_responsavel =  retireAspas(leitorLinhas[12].trim());
+						String nome_responsavel_preenchimento =  retireAspas(leitorLinhas[13].trim());
+						String contato_responsavel_preenchimento =  retireAspas(leitorLinhas[14].trim());
+						//System.err.println("XDXDXD?" + contato_responsavel_preenchimento);
+						String fonte_inf =  retireAspas(leitorLinhas[15].trim());
+						String nome_resp_at =  retireAspas(leitorLinhas[16].trim());
+						String contato_resp_at =  retireAspas(leitorLinhas[17].trim());
+						String email_resp_at =  retireAspas(leitorLinhas[18].trim());
+					
+					list_atrativos.add(new AtrativoTuristico(date,codValidacao,nomeAtrativo,comoChegar,descricao,infContato,latitude,longitude,site,cidade,estado,informacoes_relevantes,
+							email_responsavel,nome_responsavel_preenchimento,contato_responsavel_preenchimento,fonte_inf,nome_resp_at,contato_resp_at,
+							email_resp_at));
+					
+				}
+				
+			}
+			
 		}
-		System.err.println("Tamanho da lista atrativos"+list_atrativos.size());
+		if(list_atrativos.size() != 0){
+			int tamanhoVetor = list_atrativos.size();
+			salvarLogs_turisticos(list_atrativos , path , tamanhoVetor);
+			System.err.println("Tamanho da lista Atrativos: "+tamanhoVetor);
+		}
 		return list_atrativos;
 	}
 	
@@ -284,7 +337,7 @@ public class LoaderCSV {
 			}
 		
 	}
-	public void salvarLogs_turisticos(ArrayList<AtrativoTuristico> list, String caminhoCSV){
+	public void salvarLogs_turisticos(ArrayList<AtrativoTuristico> list, String caminhoCSV , int tamanhoVETOR){
 		try {
 			// File file = new
 			/*
@@ -292,12 +345,11 @@ public class LoaderCSV {
 			 */
 			
 			
-			// Obs:
-			// Esse caminho do log precisa ser melhorado, carregar o patch que o usuario coloca quando carrega um arquivo.
+			//
 			
 			
 			
-			File file = new File("/home/osvaldoairon/Documentos/AtrativosTuristicos_LOG.txt"); // quebra de linha \r\n
+			File file = new File(caminhoCSV+"/"+"LOG_ATRATIVOS_TURISTICOS.txt"); // quebra de linha \r\n
 			String dados_turismo = "";
 			String conteudo;
 			if(file!=null){
@@ -309,7 +361,7 @@ public class LoaderCSV {
 			arq.write("\r\n");
 			for (int i = 0; i < list.size(); i++) {
 
-				dados_turismo = "Nome: " + list.get(i).getNome() + "\r\n" + "Como chegar: " + list.get(i).getComoChegar()
+				dados_turismo = "Nome: " + list.get(i).getNome_atrativo() + "\r\n" + "Como chegar: " + list.get(i).getComoChegar()
 						+ "\r\n" + "DescriÃ§Ã£o: " + list.get(i).getDescricao() + "\r\n" + "Latitude: " + list.get(i).getLatitude()
 						+ "\r\n" + "Longitude: " + list.get(i).getLongitude() + "\r\n" + "InfomaÃ§Ã£o Contato: " + list.get(i).getInfoContato() + "\r\n" +
 						"\r\n" + "Site: " + list.get(i).getSite() + "\r\n" + "----------------------------------------------------------------------------------------------------------------" + "\r\n";
@@ -338,7 +390,7 @@ public class LoaderCSV {
 			
 			
 			
-			File file = new File("caminhoCSV"); // quebra de linha \r\n
+			File file = new File(caminhoCSV+"/"+"LOG_MUNICIPIOS.txt"); // quebra de linha \r\n
 			String dados_muncipio = "";
 			String conteudo;
 			int lenListaCity = lenLista;
@@ -351,7 +403,7 @@ public class LoaderCSV {
 			arq.write("\r\n");
 			for (int i = 0; i < list.size(); i++) {
 
-				dados_muncipio = "Ã�rea TerritÃ³rial: " + list.get(i).getAreaTerritorial() + "\r\n" + "CEP: " + list.get(i).getCep()
+				dados_muncipio = "Area Territorial: " + list.get(i).getAreaTerritorial() + "\r\n" + "CEP: " + list.get(i).getCep()
 						+ "\r\n" + "Estado: " + list.get(i).getEstado() + "\r\n" + "Latitude: " + list.get(i).getLatitude()
 						+ "\r\n" + "Longitude: " + list.get(i).getLongitude() + "\r\n" + "Nome: " + list.get(i).getNomecidade() + "\r\n" + "PopulaÃ§Ã£o: " + list.get(i).getPopulacao()
 						+ "\r\n" + "Site: " + list.get(i).getSite() + "\r\n" + "----------------------------------------------------------------------------------------------------------------" + "\r\n";
@@ -402,7 +454,7 @@ public class LoaderCSV {
 		if(saida_normal.contains("null")){
 			String[] vl = saida_normal.split("null");
 			for( String s : vl){
-				System.out.println("xd: "+s);
+				
 
 					 x = s;
 			}

@@ -128,7 +128,7 @@ public class InterfaceBuscaCSV implements ActionListener{
 					carregarMunicipios(caminho , path_log);
 					inter = false;
 				}else if(p.equals(validaAtrativo)){
-					carregarAtrativosTuristicos(caminho);
+					carregarAtrativosTuristicos(caminho, path_log);
 					inter =false;
 				}else{
 					inter=true;
@@ -161,12 +161,12 @@ public class InterfaceBuscaCSV implements ActionListener{
 				JOptionPane.showMessageDialog(null, "Dados do tipo Praias foram inseridos");
 			}
 		}
-		public static void carregarAtrativosTuristicos(String patch) throws SQLException, ClassNotFoundException{
+		public static void carregarAtrativosTuristicos(String patch, String path_log) throws SQLException, ClassNotFoundException, IOException{
 			LoaderCSV loader_atrativo = new LoaderCSV();
 
 			AtrativoTuristico_control a = new AtrativoTuristico_control();
 			
-			lista_Atrativo = loader_atrativo.lerArquivosCSV_AtrativoTuristico(patch);
+			lista_Atrativo = loader_atrativo.lerArquivosCSV_AtrativoTuristico(patch , path_log);
 			if(lista_Atrativo!=null){
 				for(int i = 0 ; i <lista_Atrativo.size();i++){
 					a.addAtratativoTuristico(lista_Atrativo.get(i));
