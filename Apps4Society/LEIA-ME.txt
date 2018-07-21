@@ -1,0 +1,7 @@
+------------------------- JAVA -OPEN CSV ------------------------------------------
+
+
+Fase 1: AJUSTES (pendencia)
+
+1) - Colocar o caminho(patch) dos arquivos tanto para windows, quanto linux. Utilizar alguma bilioteca especifica.
+2) - Melhorar a interface Grafica do aplicativo.
