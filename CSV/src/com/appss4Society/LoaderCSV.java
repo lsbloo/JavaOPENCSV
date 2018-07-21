@@ -399,14 +399,23 @@ public class LoaderCSV {
 			}
 
 			FileWriter arq = new FileWriter(file);
+			arq.write("---------------------------------Apps4Society--------------------------------------");
+			arq.write("\r\n");
+			arq.write("\r\n");
+			arq.write(" -                CONTROLE DE LOGS PARA MUNICIPIOS ARMAZENADOS -");
+			arq.write("\r\n");
+			arq.write("\r\n");
 			arq.write("--------------- RelatÃ³rio de Municipios Salvos pelo Sistema ---------------------");
 			arq.write("\r\n");
 			for (int i = 0; i < list.size(); i++) {
 
-				dados_muncipio = "Area Territorial: " + list.get(i).getAreaTerritorial() + "\r\n" + "CEP: " + list.get(i).getCep()
+				dados_muncipio = "Data Preenchimento Formulario: "+list.get(i).getDate()+ "\r\n" +"Descricao: "+list.get(i).getDescricao() + "\r\n" +"Area Territorial: " + list.get(i).getAreaTerritorial() + "\r\n" + "Contato Responsavel pelo Preenchimento: " + list.get(i).getContatos_responsavel()
 						+ "\r\n" + "Estado: " + list.get(i).getEstado() + "\r\n" + "Latitude: " + list.get(i).getLatitude()
 						+ "\r\n" + "Longitude: " + list.get(i).getLongitude() + "\r\n" + "Nome: " + list.get(i).getNomecidade() + "\r\n" + "PopulaÃ§Ã£o: " + list.get(i).getPopulacao()
-						+ "\r\n" + "Site: " + list.get(i).getSite() + "\r\n" + "----------------------------------------------------------------------------------------------------------------" + "\r\n";
+						+ "\r\n" + "Nome Responsavel Preenchimento: "+list.get(i).getNome_responsavel()+ 
+						"\r\n" +"Fonte de Informacoes: "+list.get(i).getFonte_informacoes()+
+						"\r\n"+
+						"Informacoes Relevantes: "+list.get(i).getInformacoesRelevantes()+ "\r\n" +"Email Responsavel Preenchimento: "+list.get(i).getEmail_responsavel()+ "\r\n" +"Site: " + list.get(i).getSite() + "\r\n" + "----------------------------------------------------------------------------------------------------------------" + "\r\n";
 				
 				arq.write("\r\n");
 				conteudo = dados_muncipio;

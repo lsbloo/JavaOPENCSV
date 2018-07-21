@@ -110,7 +110,6 @@ public class User_control implements DataUser{
 		
 		String sql = "SELECT login,pass,codigo FROM usuarios";
 	
-		System.out.println(sql);
 		PreparedStatement st = (PreparedStatement)cx.prepareStatement(sql);
 		ResultSet rx = st.executeQuery();
 		while(rx.next()) {

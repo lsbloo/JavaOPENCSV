@@ -21,22 +21,11 @@ public class Main {
 	*/
 	public static void main(String[] args) throws IllegalStateException, IOException, ClassNotFoundException, SQLException, NoSuchAlgorithmException{	
 		
-		User u = new User();
-		u.setPass("6036236");
-		u.setNome("osvaldo");
-		u.setEmail("osvaldo_cavalcanti_filho@hotmail.com");
-		u.setCodigo("49946325");
-		u.setLogin("lsbloo");
-		
-		
-		User_control dt = new User_control();
-		dt.CadaddUser(u);
-		boolean saida = dt.efetuarLogin("lsbloo", "121762172626", "49946325");
-		System.out.println("Saida: " + saida);
+	
 		
 		
 		
-		//new InterfaceBuscaCSV();
+		new InterfaceBuscaCSV();
 		
 	}
 }
