@@ -17,6 +17,7 @@ import apps4Society.dao.User_control;
 import java.util.Date;
 import cUtils.MeuCalendario;
 import application.CadUserWindow;
+import application.WindowCSV;
 
 
 public class UserController implements Initializable{
@@ -56,7 +57,7 @@ public class UserController implements Initializable{
 	}
 
 	@FXML
-	private void loginUser(ActionEvent event) throws ClassNotFoundException, SQLException {
+	private void loginUser(ActionEvent event) throws Exception {
 		/*
 		 * Event of acess User to System. Botton
 		 * Verificar a entrada de dados do usuario ( evitar entradas vazias!)
@@ -73,18 +74,29 @@ public class UserController implements Initializable{
 			User_control dt = new User_control();
 			boolean saida = dt.efetuarLogin(loginf.getText().toString(),pass_f.getText().toString() , cod_f.getText().toString());
 			validarLogin(saida);
-			
+			limparCampos();
 			
 		}
 		
 		
 	}
 	
-	public void validarLogin(boolean valid) {
+	public void limparCampos() {
+		loginf.setText("");
+		pass_f.setText("");
+		cod_f.setText("");
+	}
+	
+	public void validarLogin(boolean valid) throws Exception {
 		if(valid) {
 			System.out.println("Login realizado!");
+			new WindowCSV().start(new Stage());
 		}else {
 			System.err.println("Senha errada!");
+			dialogError= new Alert(Alert.AlertType.ERROR);
+			dialogError.setTitle("SENHA ERRADA!");
+			dialogError.setContentText("Senha errada, tente novamente!");
+			dialogError.show();
 		}
 	}
 	

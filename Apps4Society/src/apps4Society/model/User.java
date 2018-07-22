@@ -55,7 +55,13 @@ public class User {
 	}
 	
 	
-	public User() {
+	public User(String nome , String login , String email , String senha ,String codigo, String datacad) {
+		setNome(nome);
+		setLogin(login);
+		setEmail(email);
+		setPass(senha);
+		setCodigo(codigo);
+		setData_acesso(datacad);
 
 	}
 	

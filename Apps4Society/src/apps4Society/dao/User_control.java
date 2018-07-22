@@ -48,7 +48,7 @@ public class User_control implements DataUser{
 		if(verificUser(user)) {
 			System.out.println("Usuario ja cadastrado!");
 		}else {
-			String sql = "INSERT INTO usuarios (nome,login,pass,email,codigo) VALUES (?,?,?,?,?)";
+			String sql = "INSERT INTO usuarios (nome,login,pass,email,codigo,date_acesso) VALUES (?,?,?,?,?,?)";
 			
 			
 			Connection cx = ConfBanco.getConnection();
@@ -60,6 +60,7 @@ public class User_control implements DataUser{
 			stat.setString(3, user.getPass());
 			stat.setString(4, user.getEmail());
 			stat.setString(5, user.getCodigo());
+			stat.setString(6, user.getData_acesso());
 			
 			
 			stat.execute();
@@ -129,7 +130,7 @@ public class User_control implements DataUser{
 			Connection cx = ConfBanco.getConnection();
 			
 			String sql = "SELECT login,pass,codigo FROM usuarios WHERE login="+login_query + " AND pass="+pass_query;
-			System.err.println(sql);
+			//System.err.println(sql);
 		
 			PreparedStatement st = (PreparedStatement)cx.prepareStatement(sql);
 			ResultSet rx = st.executeQuery();

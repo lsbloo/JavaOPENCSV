@@ -12,7 +12,7 @@
 <AnchorPane minHeight="350.0" minWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="apps4Society.controller.UserController">
    <children>
       <TextField fx:id="loginf" layoutX="39.0" layoutY="108.0" prefHeight="25.0" prefWidth="223.0" />
-      <Label layoutX="39.0" layoutY="86.0" text="Usuario">
+      <Label layoutX="39.0" layoutY="86.0" text="Login">
          <font>
             <Font name="Comic Sans MS" size="15.0" />
          </font>
@@ -27,9 +27,9 @@
             <Font size="18.0" />
          </font>
       </Button>
-      <ImageView fitHeight="179.0" fitWidth="182.0" layoutX="384.0" layoutY="86.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="179.0" fitWidth="182.0" layoutX="390.0" layoutY="66.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../Resources/globe.png" />
+            <Image url="@../recursos/globe.png" />
          </image>
       </ImageView>
       <Label layoutX="233.0" layoutY="23.0" text="Apps4Society" textFill="#4109f8">
