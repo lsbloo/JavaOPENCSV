@@ -6,7 +6,7 @@
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.OpenButtonController">
    <children>
-      <Button fx:id="button" layoutX="438.0" layoutY="347.0" mnemonicParsing="false" onAction="#openFolder" text="Procurar Arquivo CSV" />
-      <TextField fx:id="fieldPath" layoutX="3.0" layoutY="347.0" prefHeight="25.0" prefWidth="421.0" />
+      <Button fx:id="button" layoutX="446.0" layoutY="347.0" mnemonicParsing="false" onAction="#openFolder" text="Procurar Arquivo CSV" />
+      <TextField fx:id="fieldPath" layoutX="14.0" layoutY="347.0" prefHeight="25.0" prefWidth="421.0" />
    </children>
 </AnchorPane>

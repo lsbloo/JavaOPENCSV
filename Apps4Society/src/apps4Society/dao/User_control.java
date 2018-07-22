@@ -83,6 +83,7 @@ public class User_control implements DataUser{
 
 	public boolean verificUser(User user) throws ClassNotFoundException, SQLException {
 		Connection cx = ConfBanco.getConnection();
+
 		
 		String sql = "SELECT login,pass,codigo FROM usuarios";
 		PreparedStatement stat = (PreparedStatement)cx.prepareStatement(sql);
@@ -105,25 +106,58 @@ public class User_control implements DataUser{
 	}
 
 	public boolean efetuarLogin(String login, String pass, String codigo) throws ClassNotFoundException, SQLException {
-		String cod_p = "49946325";
-		Connection cx = ConfBanco.getConnection();
 		
-		String sql = "SELECT login,pass,codigo FROM usuarios";
-	
-		PreparedStatement st = (PreparedStatement)cx.prepareStatement(sql);
-		ResultSet rx = st.executeQuery();
-		while(rx.next()) {
+		try{
+			String cod_p = "49946325";
+			String pass_reali =creatCriptLoginVerific(pass);
 			
-			String log = rx.getString("login");
-			String pas = rx.getString("pass");
-			String cod = rx.getString("codigo");
+			Connection cx = ConfBanco.getConnection();
 			
-			if(login.equals(log) && pass.equals(pas) && codigo.equals(cod_p)){
-				return true;
+			String sql = "SELECT login,pass,codigo FROM usuarios";
+		
+			PreparedStatement st = (PreparedStatement)cx.prepareStatement(sql);
+			ResultSet rx = st.executeQuery();
+			boolean condxStop = false;
+			
+			while(rx.next()) {
+				
+				String log = rx.getString("login");
+				String pas = rx.getString("pass");
+				String cod = rx.getString("codigo");
+				
+				
+				if(log.equals(login) && pas.equals(pass_reali) && cod_p.equals(cod)){
+					condxStop = true;
+					return true;
+					
+				}
+				if(condxStop) {
+					break;
+				}
+				
+				
 			}
 			
+		}catch(Exception e) {
+			
 		}
+		
 		return false;
+	}
+
+	@Override
+	public String creatCriptLoginVerific(String pass) throws NoSuchAlgorithmException, UnsupportedEncodingException {
+		// TODO Auto-generated method stub
+		final MessageDigest md = MessageDigest.getInstance("MD5");
+		final byte[] pass_hash_login = md.digest(pass.getBytes("UTF-8"));
+		StringBuilder hexString_log = new StringBuilder();
+		for(byte bb : pass_hash_login) {
+			hexString_log.append(String.format("%02X", 0xFF & bb));
+		}
+		String senhacript_login = hexString_log.toString();
+	
+		return senhacript_login;
+		
 	}
 
 	

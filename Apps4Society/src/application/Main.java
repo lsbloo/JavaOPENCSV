@@ -14,10 +14,13 @@ public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) throws IOException {
 		
-		Pane root = FXMLLoader.load(getClass().getResource("Tela.fxml"));
+		Pane painel_user = FXMLLoader.load(getClass().getResource("InterUser.fxml"));
 		
-		Scene scene = new Scene(root,600,400);
-		primaryStage.setScene(scene);
+		
+		Scene scene_user = new Scene(painel_user,600,350);
+		
+		primaryStage.setResizable(false);
+		primaryStage.setScene(scene_user);
 		
 		primaryStage.show();
 	}
@@ -25,4 +28,5 @@ public class Main extends Application {
 	public static void main(String[] args) {
 		launch(args);
 	}
+	
 }

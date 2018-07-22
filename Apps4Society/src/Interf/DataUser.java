@@ -13,4 +13,5 @@ public interface DataUser {
 	public void removeUser(String nomeUser, String codigoUser);
 	public User searchUser(String nameUser , String codigoUser);
 	public boolean efetuarLogin(String login, String pass , String codigo) throws ClassNotFoundException, SQLException;
+	public String creatCriptLoginVerific(String pass) throws NoSuchAlgorithmException, UnsupportedEncodingException;
 }
