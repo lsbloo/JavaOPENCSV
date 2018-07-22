@@ -9,6 +9,14 @@ public class User {
 	private String codigo;
 	private String login;
 	private String pass;
+	private String data_cadastro;
+	
+	public void setData_acesso(String data) {
+		this.data_cadastro=data;
+	}
+	public String getData_acesso() {
+		return data_cadastro;
+	}
 	public long getId() {
 		return id;
 	}

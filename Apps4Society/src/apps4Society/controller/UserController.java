@@ -2,6 +2,7 @@ package apps4Society.controller;
 
 import java.net.URL;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.ResourceBundle;
 
 import javafx.event.ActionEvent;
@@ -10,8 +11,12 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 import javafx.scene.control.PasswordField;
 import apps4Society.dao.User_control;
+import java.util.Date;
+import cUtils.MeuCalendario;
+import application.CadUserWindow;
 
 
 public class UserController implements Initializable{
@@ -30,20 +35,34 @@ public class UserController implements Initializable{
 	private TextField loginf;
 	@FXML 
 	private PasswordField pass_f;
+	
 	@FXML
 	private PasswordField cod_f;
 	
 	private Alert dialogError;
+	private MeuCalendario mycalendar;
 
-	
+	private static boolean verific;
+
+	public void showHints() {
+		pass_f = new PasswordField();
+		pass_f.setPromptText("Insira a senha aqui");
+		cod_f = new PasswordField();
+		cod_f.setPromptText("Insira o codigo administrador aqui");
+	}
+	@FXML
+	private void cadInterface(ActionEvent event) throws Exception {
+		new CadUserWindow().start(new Stage());
+	}
 
 	@FXML
-	private boolean loginUser(ActionEvent event) throws ClassNotFoundException, SQLException {
+	private void loginUser(ActionEvent event) throws ClassNotFoundException, SQLException {
 		/*
 		 * Event of acess User to System. Botton
 		 * Verificar a entrada de dados do usuario ( evitar entradas vazias!)
 		 * imprimir senha invalida Caixa de texto ou aviso
 		 */
+		
 		dialogError = new Alert(Alert.AlertType.ERROR);
 		
 		if(loginf.getText().toString().isEmpty() || pass_f.getText().toString().isEmpty() || cod_f.getText().toString().isEmpty()) {
@@ -53,14 +72,20 @@ public class UserController implements Initializable{
 		}else {
 			User_control dt = new User_control();
 			boolean saida = dt.efetuarLogin(loginf.getText().toString(),pass_f.getText().toString() , cod_f.getText().toString());
-			System.out.println(saida);
-			return saida;
+			validarLogin(saida);
+			
+			
 		}
-		return false;
 		
 		
-		
-		
+	}
+	
+	public void validarLogin(boolean valid) {
+		if(valid) {
+			System.out.println("Login realizado!");
+		}else {
+			System.err.println("Senha errada!");
+		}
 	}
 	
 	@Override

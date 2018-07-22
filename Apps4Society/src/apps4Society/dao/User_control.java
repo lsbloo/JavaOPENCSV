@@ -128,7 +128,7 @@ public class User_control implements DataUser{
 			
 			Connection cx = ConfBanco.getConnection();
 			
-			String sql = "SELECT * FROM usuarios WHERE login="+login_query + " AND pass="+pass_query;
+			String sql = "SELECT login,pass,codigo FROM usuarios WHERE login="+login_query + " AND pass="+pass_query;
 			System.err.println(sql);
 		
 			PreparedStatement st = (PreparedStatement)cx.prepareStatement(sql);
