@@ -21,5 +21,9 @@
 	<classpathentry kind="lib" path="opencsv-4.1.jar"/>
 	<classpathentry kind="lib" path="postgresql-42.2.2.jar"/>
 	<classpathentry kind="lib" path="slf4j.jar"/>
+	<classpathentry kind="lib" path="postgres-socket-factory-1.0.10-jar-with-dependencies.jar"/>
+	<classpathentry kind="lib" path="postgres-socket-factory-1.0.10.jar"/>
+	<classpathentry kind="lib" path="mssql-jdbc-6.4.0.jre8.jar"/>
+	<classpathentry kind="lib" path="mssql-jdbc-6.4.0.jre9.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
