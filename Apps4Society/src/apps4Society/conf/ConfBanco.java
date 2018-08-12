@@ -8,8 +8,8 @@ public class ConfBanco {
 		
 		String hostname="apps4society-2018.database.windows.net";
 		String appDB = "apps4Society";
-		String user = "rootosvaldo@apps4society-2018";
-		String password = "7154819osvaldo-";
+		String user = "SuperSecreto";
+		String password = "SuperSecreto";
 		String url = String.format("jdbc:sqlserver://%s:1433;database=%s;user=%s;password=%s;encrypt=true;trustServerCertificate=true;hostNameInCertificate=*.database.windows.net;loginTimeout=50;",hostname,appDB,user,password);
 		
 	
